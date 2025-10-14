@@ -48,7 +48,7 @@ a:hover{text-decoration:underline}
 .page-hero{background:var(--soft);border-bottom:1px solid var(--divider)}
 .page-hero .container{padding-top:48px;padding-bottom:24px}
 
-.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:900px;margin:18px auto}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:900px;margin:18px auto;grid-auto-flow:dense}
 /* Make most gallery images a bit taller; main image keeps normal height */
 .gallery img{width:100%;height:auto;max-height:920px;object-fit:contain;border-radius:12px;border:1px solid var(--divider);box-shadow:var(--shadow);background:#fff;padding:6px}
 .gallery img.main{max-height:540px}
@@ -58,7 +58,7 @@ a:hover{text-decoration:underline}
 .gallery a img{display:block}
 
 /* Before/After component styles */
-.beforeafter{display:flex;gap:12px;grid-column:span 2}
+.beforeafter{display:flex;gap:12px;grid-column:1 / -1}
 .beforeafter img{width:50%;height:auto;max-height:920px;object-fit:contain;border-radius:12px;border:1px solid var(--divider);background:#fff;padding:6px}
 .beforeafter .before::after{content:"Before";display:block;text-align:center;margin-top:6px;color:var(--muted)}
 .beforeafter .after::after{content:"After";display:block;text-align:center;margin-top:6px;color:var(--muted)}

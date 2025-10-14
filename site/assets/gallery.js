@@ -99,6 +99,17 @@
 
   document.addEventListener('DOMContentLoaded', function(){
     const links = document.querySelectorAll('a[data-large]');
-    links.forEach(l => l.addEventListener('click', open));
+    links.forEach(l => {
+      l.addEventListener('click', open);
+      l.dataset.gwBound = '1';
+    });
+
+    // safety: prevent default navigation for any a[data-large] if JS didn't bind
+    document.addEventListener('click', function(e){
+      const a = e.target.closest && e.target.closest('a[data-large]');
+      if(a && a.dataset.gwBound !== '1'){
+        e.preventDefault();
+      }
+    });
   });
 })();
