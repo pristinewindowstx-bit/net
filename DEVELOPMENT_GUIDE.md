@@ -1,23 +1,28 @@
 # Development Environment Guide
 
-## Question: GitHub Copilot vs Visual Studio - Which Should I Use?
+## Question: GitHub-based Tools vs Local Development - Which Should I Use?
 
-This guide helps you choose the right development environment for working on the Pristine Windows and Services website.
+This guide helps you choose the right development environment for working on the Pristine Windows and Services website. It compares GitHub-based tools (GitHub Copilot, GitHub.dev, GitHub Codespaces) with local development environments (Visual Studio Code, Visual Studio).
 
 ---
 
 ## Quick Answer
 
-**For this project, both tools are excellent choices, but they serve different purposes:**
+**For this project, both approaches are excellent, but they serve different purposes:**
 
-- **Use GitHub Copilot (Web/GitHub Codespaces)** for quick edits, collaborative reviews, and when you want to work from anywhere
-- **Use Visual Studio/VS Code** for extensive local development, full IDE features, and testing live previews
+- **Use GitHub-based tools (GitHub.dev/Codespaces with Copilot)** for quick edits, collaborative reviews, and when you want to work from anywhere
+- **Use local development (VS Code/Visual Studio)** for extensive development, full IDE features, and testing live previews
 
 ---
 
 ## Detailed Comparison
 
-### GitHub Copilot / GitHub.dev / GitHub Codespaces
+### GitHub-based Development Tools
+
+This section covers three related but distinct tools:
+- **GitHub Copilot** - AI-powered code completion assistant (works in both web and local editors)
+- **GitHub.dev** - Lightweight web-based code editor (press `.` on any repo)
+- **GitHub Codespaces** - Full cloud development environment with VS Code in browser
 
 **Best for:**
 - ✅ Quick fixes and small edits to HTML/CSS
@@ -177,4 +182,4 @@ There's no wrong choice - use what feels most comfortable and efficient for your
 
 ---
 
-*Last Updated: October 2025*
+*Document created: October 2024*

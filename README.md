@@ -58,7 +58,7 @@ code .
 ## 📚 Need Help Choosing a Development Environment?
 
 See **[DEVELOPMENT_GUIDE.md](./DEVELOPMENT_GUIDE.md)** for a detailed comparison of:
-- GitHub Copilot vs Visual Studio
+- GitHub-based tools (Copilot, GitHub.dev, Codespaces) vs local development (VS Code, Visual Studio)
 - When to use each tool
 - Setup instructions
 - Best practices for this project
