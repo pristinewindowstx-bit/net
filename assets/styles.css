@@ -49,7 +49,8 @@ a:hover{text-decoration:underline}
 .page-hero .container{padding-top:48px;padding-bottom:24px}
 
 .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.gallery img{width:100%;height:220px;object-fit:cover;border-radius:12px;border:1px solid var(--divider);box-shadow:var(--shadow)}
+/* Allow images to keep their aspect ratio. Use auto height and limit max-height to avoid huge images */
+.gallery img{width:100%;height:auto;max-height:420px;object-fit:contain;border-radius:12px;border:1px solid var(--divider);box-shadow:var(--shadow);background:#fff;padding:6px}
 
 details{background:var(--card);border:1px solid var(--divider);border-radius:12px;padding:14px 16px;margin-bottom:12px;box-shadow:var(--shadow)}
 
