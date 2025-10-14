@@ -58,24 +58,24 @@ a:hover{text-decoration:underline}
 .gallery a img{display:block}
 
 /* Before/After component styles */
-.beforeafter{display:flex;gap:12px}
+.beforeafter{display:flex;gap:12px;grid-column:span 2}
 .beforeafter img{width:50%;height:auto;max-height:920px;object-fit:contain;border-radius:12px;border:1px solid var(--divider);background:#fff;padding:6px}
 .beforeafter .before::after{content:"Before";display:block;text-align:center;margin-top:6px;color:var(--muted)}
 .beforeafter .after::after{content:"After";display:block;text-align:center;margin-top:6px;color:var(--muted)}
 
 /* Lightbox overlay styles (gw = gallery wide) */
-.gw-overlay{position:fixed;inset:0;background:rgba(2,6,23,0.72);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .18s ease,visibility .18s ease;z-index:9999}
+.gw-overlay{position:fixed;inset:0;background:rgba(2,6,23,0.8);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .18s ease,visibility .18s ease;z-index:2147483647}
 .gw-overlay.open{opacity:1;visibility:visible}
 /* make inner modal a small centered panel instead of full-bleed */
 .gw-inner{position:relative;max-width:780px;width:min(88vw,780px);max-height:64vh;padding:12px 18px;background:rgba(10,14,18,0.92);border-radius:12px;display:flex;align-items:center;justify-content:center;gap:14px}
-.gw-img{max-width:68%;max-height:56vh;border-radius:8px;box-shadow:0 20px 44px rgba(0,0,0,.6);display:block;transition:transform .18s ease}
+.gw-img{max-width:60%;max-height:52vh;border-radius:8px;box-shadow:0 20px 44px rgba(0,0,0,.6);display:block;transition:transform .18s ease}
 .gw-close{position:absolute;right:10px;top:8px;background:rgba(0,0,0,0.25);border:none;color:#fff;font-size:30px;line-height:1;padding:6px 10px;border-radius:6px;cursor:pointer}
 .gw-overlay:focus{outline:none}
 
 /* navigation arrows and caption: place arrows inside the modal, vertically centered */
-.gw-prev,.gw-next{position:relative;background:rgba(255,255,255,0.06);border:none;color:#fff;font-size:34px;width:64px;height:64px;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter: blur(4px);box-shadow:0 6px 18px rgba(0,0,0,.4);z-index:30}
-.gw-prev{order:0}
-.gw-next{order:2}
+.gw-prev,.gw-next{position:relative;background:rgba(255,255,255,0.08);border:none;color:#fff;font-size:34px;width:72px;height:72px;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter: blur(6px);box-shadow:0 6px 18px rgba(0,0,0,.5);z-index:30}
+.gw-prev{order:0;margin-left:6px}
+.gw-next{order:2;margin-right:6px}
 .gw-prev:hover,.gw-next:hover{background:rgba(255,255,255,0.16)}
 .gw-caption{position:absolute;left:16px;right:16px;bottom:8px;color:#fff;text-align:center;font-size:14px;padding:6px 10px;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,0.45));border-radius:6px}
 
@@ -91,6 +91,9 @@ a:hover{text-decoration:underline}
   .gw-prev,.gw-next{width:40px;height:56px;font-size:28px}
   .gw-close{font-size:24px}
 }
+
+/* lock body scroll while overlay is open */
+body.gw-open{overflow:hidden;height:100vh}
 
 details{background:var(--card);border:1px solid var(--divider);border-radius:12px;padding:14px 16px;margin-bottom:12px;box-shadow:var(--shadow)}
 

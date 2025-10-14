@@ -38,9 +38,11 @@
     const img = a.querySelector('img');
     const alt = img ? img.getAttribute('alt') : '';
     const index = anchors.findIndex(it => it.href === src);
-    const overlay = createOverlay(src, alt, index, anchors.length);
-    document.body.appendChild(overlay);
-    requestAnimationFrame(()=> overlay.classList.add('open'));
+  const overlay = createOverlay(src, alt, index, anchors.length);
+  document.body.appendChild(overlay);
+  // lock body scroll and mark open
+  document.body.classList.add('gw-open');
+  requestAnimationFrame(()=> overlay.classList.add('open'));
 
     function navigateTo(i){
       if(i < 0) i = anchors.length - 1;
@@ -57,7 +59,7 @@
     function closeHandler(ev){
       if(ev.target === overlay || ev.target.classList.contains('gw-close')){
         overlay.classList.remove('open');
-        overlay.addEventListener('transitionend', ()=> overlay.remove(), {once:true});
+        overlay.addEventListener('transitionend', ()=> { overlay.remove(); document.body.classList.remove('gw-open'); }, {once:true});
         document.removeEventListener('keydown', keyHandler);
       }
     }
@@ -69,11 +71,14 @@
     }
 
     overlay.addEventListener('click', function(ev){
-      // close when clicking outside inner
+      // close when clicking outside inner (but ignore clicks on controls)
+      // don't close if click happened inside gw-inner
+      const inner = overlay.querySelector('.gw-inner');
+      if(inner && inner.contains(ev.target)) return;
       if(ev.target === overlay) closeHandler({target: overlay});
     });
 
-    // prev/next button handlers
+    // prev/next button handlers (use event delegation)
     overlay.addEventListener('click', function(ev){
       if(ev.target.classList.contains('gw-prev')){
         navigateTo(Number(overlay.dataset.index) - 1);
@@ -83,6 +88,13 @@
     });
 
     document.addEventListener('keydown', keyHandler);
+    // preload neighbors for snappy navigation
+    function preloadNeighbor(i){
+      if(!anchors[i]) return;
+      const p = new Image(); p.src = anchors[i].href;
+    }
+    preloadNeighbor(index-1);
+    preloadNeighbor(index+1);
   }
 
   document.addEventListener('DOMContentLoaded', function(){
