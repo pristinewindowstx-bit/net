@@ -49,8 +49,15 @@ a:hover{text-decoration:underline}
 .page-hero .container{padding-top:48px;padding-bottom:24px}
 
 .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-/* Allow images to keep their aspect ratio. Use auto height and limit max-height to avoid huge images */
-.gallery img{width:100%;height:auto;max-height:420px;object-fit:contain;border-radius:12px;border:1px solid var(--divider);box-shadow:var(--shadow);background:#fff;padding:6px}
+/* Make most gallery images a bit taller; main image keeps normal height */
+.gallery img{width:100%;height:auto;max-height:520px;object-fit:contain;border-radius:12px;border:1px solid var(--divider);box-shadow:var(--shadow);background:#fff;padding:6px}
+.gallery img.main{max-height:420px}
+
+/* Before/After component styles */
+.beforeafter{display:flex;gap:12px}
+.beforeafter img{width:50%;height:auto;max-height:520px;object-fit:contain;border-radius:12px;border:1px solid var(--divider);background:#fff;padding:6px}
+.beforeafter .before::after{content:"Before";display:block;text-align:center;margin-top:6px;color:var(--muted)}
+.beforeafter .after::after{content:"After";display:block;text-align:center;margin-top:6px;color:var(--muted)}
 
 details{background:var(--card);border:1px solid var(--divider);border-radius:12px;padding:14px 16px;margin-bottom:12px;box-shadow:var(--shadow)}
 
