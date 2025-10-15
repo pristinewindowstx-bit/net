@@ -82,7 +82,7 @@ a:hover{text-decoration:underline}
 .page-hero{background:var(--soft);border-bottom:1px solid var(--divider)}
 .page-hero .container{padding-top:48px;padding-bottom:24px}
 
-/* Carousel: single-image selector replacing multi-column gallery */
+/* Carousel: single-image selector replacing multi-column gallery - v2024 */
 .carousel{
   position:relative;
   display:flex;
