@@ -6,6 +6,8 @@
   --muted:#9aa9b3; /* secondary text */
   --accent:#e10600; /* brand accent */
   --card:#000000; /* card / panel background (true black) */
+  --topbar-bg:#070708; /* slightly lighter black for header */
+  --footer-bg:#050506; /* slightly darker black for footer */
   --bg:#000000; /* page background (true black) */
   --soft:#000000; /* softer panel (use black to match logo) */
   --divider:rgba(255,255,255,0.04); /* subtle divider on dark */
@@ -24,7 +26,7 @@ a:hover{text-decoration:underline}
 .grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
 @media (max-width:900px){.grid-2,.grid-3{grid-template-columns:1fr} .nav{display:none}}
 
-.topbar{position:sticky;top:0;background:#000;border-bottom:1px solid rgba(255,255,255,0.03);backdrop-filter:saturate(120%) blur(6px);z-index:60}
+.topbar{position:sticky;top:0;background:var(--topbar-bg);border-bottom:1px solid rgba(255,255,255,0.03);backdrop-filter:saturate(120%) blur(6px);z-index:60}
 .brand{display:flex;gap:12px;align-items:center;font-weight:800;color:var(--text);letter-spacing:.2px}
 .logo{width:64px;height:64px;border-radius:10px;object-fit:cover} /* bigger logo */
 .nav a{margin:0 10px;color:var(--text)}
@@ -118,7 +120,7 @@ body.gw-open{overflow:hidden;height:100vh}
 
 details{background:var(--card);border:1px solid var(--divider);border-radius:12px;padding:14px 16px;margin-bottom:12px;box-shadow:var(--shadow)}
 
-.footer{background:var(--card);color:var(--text);margin-top:40px}
+.footer{background:var(--footer-bg);color:var(--text);margin-top:40px}
 .footer a{color:var(--ink)}
 .footer .fine{color:var(--muted)}
 .footnote{border-top:1px solid var(--divider);margin-top:18px;padding-top:18px}
