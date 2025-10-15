@@ -62,7 +62,7 @@ a:hover{text-decoration:underline}
 
 /* Make service cards transparent on main page */
 .cards .card{
-  background:transparent !important;
+  background:rgba(0,0,0,0.15) !important;
   border:1px solid rgba(255,255,255,0.1) !important;
   box-shadow:none !important;
   backdrop-filter:blur(4px);
@@ -217,7 +217,7 @@ details{background:var(--card);border:1px solid var(--divider);border-radius:12p
 
 /* Make "Prefer to text or call" box transparent */
 #text-call details{
-  background:transparent !important;
+  background:rgba(0,0,0,0.15) !important;
   border:1px solid rgba(255,255,255,0.1) !important;
   box-shadow:none !important;
   backdrop-filter:blur(4px);
