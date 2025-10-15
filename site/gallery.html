@@ -38,50 +38,128 @@
 </section>
 <section class="section">
   <div class="container">
-    <div class="gallery">
-      <a href="assets/gallery/web/gallery-001.jpg" data-large>
-        <img class="main" src="assets/gallery/web/gallery-001.jpg" alt="Main project photo" loading="lazy"
-             srcset="assets/gallery/web/gallery-001-480w.jpg 480w, assets/gallery/web/gallery-001-800w.jpg 800w, assets/gallery/web/gallery-001.jpg 1200w"
-             sizes="(max-width:600px) 100vw, (max-width:1000px) 50vw, 33vw">
-      </a>
-      <a href="assets/gallery/web/gallery-002.jpg" data-large>
-        <img src="assets/gallery/web/gallery-002.jpg" alt="Project photo" loading="lazy"
-             srcset="assets/gallery/web/gallery-002-480w.jpg 480w, assets/gallery/web/gallery-002-800w.jpg 800w, assets/gallery/web/gallery-002.jpg 1200w"
-             sizes="(max-width:600px) 100vw, (max-width:1000px) 50vw, 33vw">
-      </a>
-      <div class="beforeafter">
-        <a href="assets/gallery/web/before.jpg" data-large class="before-wrap">
-          <img src="assets/gallery/web/before.jpg" alt="Before project photo" class="before" loading="lazy"
-               srcset="assets/gallery/web/before-480w.jpg 480w, assets/gallery/web/before-800w.jpg 800w, assets/gallery/web/before.jpg 1200w"
-               sizes="(max-width:600px) 100vw, (max-width:1000px) 50vw, 33vw">
-        </a>
-        <a href="assets/gallery/web/after.jpg" data-large class="after-wrap">
-          <img src="assets/gallery/web/after.jpg" alt="After project photo" class="after" loading="lazy"
-               srcset="assets/gallery/web/after-480w.jpg 480w, assets/gallery/web/after-800w.jpg 800w, assets/gallery/web/after.jpg 1200w"
-               sizes="(max-width:600px) 100vw, (max-width:1000px) 50vw, 33vw">
-        </a>
+  <h2>Projects</h2>
+  <div class="carousel" id="carousel" aria-roledescription="carousel">
+      <button class="carousel-prev" aria-label="Previous image">‹</button>
+      <div class="carousel-frame">
+     <img id="carousel-img"
+       src="assets/gallery/web/gallery_001.jpg"
+       srcset="assets/gallery/web/gallery_001-480w.jpg 480w, assets/gallery/web/gallery_001-800w.jpg 800w, assets/gallery/web/gallery_001.jpg 1200w"
+             sizes="(max-width:600px) 100vw, (max-width:1000px) 70vw, 60vw"
+             alt="Main project photo" loading="lazy">
+        <div id="carousel-caption" class="carousel-caption">Main project photo</div>
       </div>
-      <a href="assets/gallery/web/IMG_0826.jpg" data-large>
-        <img src="assets/gallery/web/IMG_0826.jpg" alt="Project photo IMG_0826" loading="lazy"
-             srcset="assets/gallery/web/IMG_0826-480w.jpg 480w, assets/gallery/web/IMG_0826-800w.jpg 800w, assets/gallery/web/IMG_0826.jpg 1200w"
-             sizes="(max-width:600px) 100vw, (max-width:1000px) 50vw, 33vw">
-      </a>
-      <a href="assets/gallery/web/IMG_1207_2.jpg" data-large>
-        <img src="assets/gallery/web/IMG_1207_2.jpg" alt="Project photo IMG_1207" loading="lazy"
-             srcset="assets/gallery/web/IMG_1207_2-480w.jpg 480w, assets/gallery/web/IMG_1207_2-800w.jpg 800w, assets/gallery/web/IMG_1207_2.jpg 1200w"
-             sizes="(max-width:600px) 100vw, (max-width:1000px) 50vw, 33vw">
-      </a>
-      <a href="assets/gallery/web/IMG_1539_2.jpg" data-large>
-        <img src="assets/gallery/web/IMG_1539_2.jpg" alt="Project photo IMG_1539" loading="lazy"
-             srcset="assets/gallery/web/IMG_1539_2-480w.jpg 480w, assets/gallery/web/IMG_1539_2-800w.jpg 800w, assets/gallery/web/IMG_1539_2.jpg 1200w"
-             sizes="(max-width:600px) 100vw, (max-width:1000px) 50vw, 33vw">
-      </a>
-      <a href="assets/gallery/web/IMG_2196.jpg" data-large>
-        <img src="assets/gallery/web/IMG_2196.jpg" alt="Project photo IMG_2196" loading="lazy"
-             srcset="assets/gallery/web/IMG_2196-480w.jpg 480w, assets/gallery/web/IMG_2196-800w.jpg 800w, assets/gallery/web/IMG_2196.jpg 1200w"
-             sizes="(max-width:600px) 100vw, (max-width:1000px) 50vw, 33vw">
-      </a>
+      <button class="carousel-next" aria-label="Next image">›</button>
     </div>
+
+    <!-- Image list (JSON) used by the carousel script -->
+    <script id="gallery-data" type="application/json">
+      [
+        {"id":"gallery_001","src":"assets/gallery/web/gallery_001.jpg","src800":"assets/gallery/web/gallery_001-800w.jpg","src480":"assets/gallery/web/gallery_001-480w.jpg","alt":"Main project photo"},
+        {"id":"before","src":"assets/gallery/web/before.jpg","src800":"assets/gallery/web/before-800w.jpg","src480":"assets/gallery/web/before-480w.jpg","alt":"Before project photo"},
+        {"id":"after","src":"assets/gallery/web/after.jpg","src800":"assets/gallery/web/after-800w.jpg","src480":"assets/gallery/web/after-480w.jpg","alt":"After project photo"}
+      ]
+    </script>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Our Team</h2>
+    <div class="carousel" id="team-carousel" aria-roledescription="carousel">
+      <button class="carousel-prev" aria-label="Previous team photo">‹</button>
+      <div class="carousel-frame">
+        <img id="team-carousel-img"
+             src="assets/gallery/web/gallery_002.jpg"
+             srcset="assets/gallery/web/gallery_002-480w.jpg 480w, assets/gallery/web/gallery_002-800w.jpg 800w, assets/gallery/web/gallery_002.jpg 1200w"
+             sizes="(max-width:600px) 100vw, (max-width:1000px) 70vw, 60vw"
+             alt="Team photo" loading="lazy">
+        <div id="team-carousel-caption" class="carousel-caption">Team photo</div>
+      </div>
+      <button class="carousel-next" aria-label="Next team photo">›</button>
+    </div>
+
+    <script id="team-gallery-data" type="application/json">
+[
+  {
+    "id": "gallery_002",
+    "src": "assets/gallery/web/gallery_002.jpg",
+    "src800": "assets/gallery/web/gallery_002-800w.jpg",
+    "src480": "assets/gallery/web/gallery_002-480w.jpg",
+    "alt": "Sam taking out a foggy pane of of glass"
+  },
+  {
+    "id": "IMG_8258",
+    "src": "assets/gallery/web/IMG_8258.jpg",
+    "src800": "assets/gallery/web/IMG_8258-800w.jpg",
+    "src480": "assets/gallery/web/IMG_8258-480w.jpg",
+    "alt": "Sam and JJ"
+  },
+  {
+    "id": "IMG_0908",
+    "src": "assets/gallery/web/IMG_0908.jpg",
+    "src800": "assets/gallery/web/IMG_0908-800w.jpg",
+    "src480": "assets/gallery/web/IMG_0908-480w.jpg",
+    "alt": "Asher and Noah Schmitty replacing a window unit"
+  },
+  {
+    "id": "IMG_1539_2",
+    "src": "assets/gallery/web/IMG_1539_2.jpg",
+    "src800": "assets/gallery/web/IMG_1539_2-800w.jpg",
+    "src480": "assets/gallery/web/IMG_1539_2-480w.jpg",
+    "alt": "Noah Schmitty carrying replacement glass"
+  },
+  {
+    "id": "IMG_1854_2",
+    "src": "assets/gallery/web/IMG_1854_2.jpg",
+    "src800": "assets/gallery/web/IMG_1854_2-800w.jpg",
+    "src480": "assets/gallery/web/IMG_1854_2-480w.jpg",
+    "alt": "team dinner"
+  },
+  {
+    "id": "IMG_2136_3",
+    "src": "assets/gallery/web/IMG_2136_3.jpg",
+    "src800": "assets/gallery/web/IMG_2136_3-800w.jpg",
+    "src480": "assets/gallery/web/IMG_2136_3-480w.jpg",
+    "alt": "Noah Schmitty, Sam and Asher working on Windows"
+  },
+  {
+    "id": "IMG_2196",
+    "src": "assets/gallery/web/IMG_2196.jpg",
+    "src800": "assets/gallery/web/IMG_2196-800w.jpg",
+    "src480": "assets/gallery/web/IMG_2196-480w.jpg",
+    "alt": "Asher"
+  },
+  {
+    "id": "IMG_2836_2",
+    "src": "assets/gallery/web/IMG_2836_2.jpg",
+    "src800": "assets/gallery/web/IMG_2836_2-800w.jpg",
+    "src480": "assets/gallery/web/IMG_2836_2-480w.jpg",
+    "alt": "Img 2836 2"
+  },
+  {
+    "id": "IMG_6286",
+    "src": "assets/gallery/web/IMG_6286.jpg",
+    "src800": "assets/gallery/web/IMG_6286-800w.jpg",
+    "src480": "assets/gallery/web/IMG_6286-480w.jpg",
+    "alt": "Img 6286"
+  },
+  {
+    "id": "IMG_6329",
+    "src": "assets/gallery/web/IMG_6329.jpg",
+    "src800": "assets/gallery/web/IMG_6329-800w.jpg",
+    "src480": "assets/gallery/web/IMG_6329-480w.jpg",
+    "alt": "Img 6329"
+  },
+  {
+    "id": "IMG_6334",
+    "src": "assets/gallery/web/IMG_6334.jpg",
+    "src800": "assets/gallery/web/IMG_6334-800w.jpg",
+    "src480": "assets/gallery/web/IMG_6334-480w.jpg",
+    "alt": "Img 6334"
+  }
+]
+</script>
   </div>
 </section>
 
