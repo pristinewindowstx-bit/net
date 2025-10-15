@@ -156,4 +156,26 @@
 
 
 </body>
+<script>
+  // Prefill quote form service based on ?service= parameter and scroll to form
+  (function(){
+    function getParam(name){
+      const url = new URL(window.location.href);
+      return url.searchParams.get(name);
+    }
+    const svc = getParam('service');
+    if(!svc) return;
+    document.addEventListener('DOMContentLoaded', function(){
+      const sel = document.querySelector('select[name="service"]');
+      if(sel){
+        const opt = Array.from(sel.options).find(o => o.value.toLowerCase() === svc.toLowerCase() || o.text.toLowerCase() === svc.toLowerCase());
+        if(opt){ sel.value = opt.value; }
+        else { sel.value = 'Other'; }
+      }
+      // scroll to the quote form anchor
+      const anchor = document.getElementById('quote-form');
+      if(anchor) anchor.scrollIntoView({behavior:'smooth'});
+    });
+  })();
+</script>
 </html>
