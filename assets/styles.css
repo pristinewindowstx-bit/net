@@ -6,10 +6,12 @@
   --muted:#9aa9b3; /* secondary text */
   --accent:#e10600; /* brand accent */
   --card:#000000; /* card / panel background (true black) */
-  --topbar-bg:#070708; /* slightly lighter black for header */
-  --footer-bg:#050506; /* slightly darker black for footer */
-  --bg:#000000; /* page background (true black) */
-  --soft:#000000; /* softer panel (use black to match logo) */
+  --topbar-bg:#000000; /* headers and accent boxes use true black */
+  --footer-bg:#000000; /* headers and accent boxes use true black */
+  --bg:#2b2f32; /* center area background (muted blue-gray) */
+  --soft:#2b2f32; /* softer panel uses same center tint */
+  /* Center content background: darkened version of the review-panel hue
+     Calculation: rgba(154,169,179,0.28) over black ≈ rgb(43,47,50) -> #2b2f32 */
   --divider:rgba(255,255,255,0.04); /* subtle divider on dark */
   --shadow:0 10px 30px rgba(0,0,0,.6);
 }
