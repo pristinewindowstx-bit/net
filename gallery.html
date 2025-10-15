@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="See real project photos from Pristine Windows & Handyman Services across the Hill Country.">
-  <title>Gallery | Pristine Windows Projects</title>
+  <title>Gallery | Pristine Windows Projects - Updated</title>
   <meta name="description" content="Pristine Windows and Services: Window Cleaning, Glass Repair & Reglazing, Junk Removal & Hauling across the Texas Hill Country.">
   <link rel="icon" href="assets/logo.jpg">
   <link rel="stylesheet" href="assets/styles.css">
@@ -38,10 +38,311 @@
 </section>
 <section class="section">
   <div class="container">
-    <div class="gallery">
-      <img src="assets/gallery/gallery-001.jpg" alt="Project photo">
-      <img src="assets/gallery/gallery-002.jpg" alt="Project photo">
+  <h2>Projects</h2>
+  <div class="carousel" id="carousel" aria-roledescription="carousel">
+      <button class="carousel-prev" aria-label="Previous image">‹</button>
+      <div class="carousel-frame">
+     <img id="carousel-img"
+       src="site/assets/gallery/web/main.jpg"
+       srcset="site/assets/gallery/web/main-480w.jpg 480w, site/assets/gallery/web/main-800w.jpg 800w, site/assets/gallery/web/main.jpg 1200w"
+             sizes="(max-width:600px) 100vw, (max-width:1000px) 70vw, 60vw"
+             alt="Main project photo" loading="lazy">
+        <div id="carousel-caption" class="carousel-caption">Main project photo</div>
+      </div>
+      <button class="carousel-next" aria-label="Next image">›</button>
     </div>
+
+    <!-- Image list (JSON) used by the carousel script -->
+    <script id="gallery-data" type="application/json">
+[
+  {
+    "id": "main",
+    "src": "site/assets/gallery/web/main.jpg",
+    "src800": "site/assets/gallery/web/main-800w.jpg",
+    "src480": "site/assets/gallery/web/main-480w.jpg",
+    "alt": "Main"
+  },
+  {
+    "id": "before",
+    "src": "site/assets/gallery/web/before.jpg",
+    "src800": "site/assets/gallery/web/before-800w.jpg",
+    "src480": "site/assets/gallery/web/before-480w.jpg",
+    "alt": "Before"
+  },
+  {
+    "id": "after",
+    "src": "site/assets/gallery/web/after.jpg",
+    "src800": "site/assets/gallery/web/after-800w.jpg",
+    "src480": "site/assets/gallery/web/after-480w.jpg",
+    "alt": "After"
+  }
+]
+</script>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Our Team</h2>
+  <div class="carousel" id="our-team-carousel" aria-roledescription="carousel">
+      <button class="carousel-prev" aria-label="Previous team photo">‹</button>
+      <div class="carousel-frame">
+     <img id="our-team-carousel-img"
+       src="site/assets/gallery/web/IMG_2836_2.jpg"
+       srcset="site/assets/gallery/web/IMG_2836_2-480w.jpg 480w, site/assets/gallery/web/IMG_2836_2-800w.jpg 800w, site/assets/gallery/web/IMG_2836_2.jpg 1200w"
+             sizes="(max-width:600px) 100vw, (max-width:1000px) 70vw, 60vw"
+             alt="Our team" loading="lazy">
+        <div id="our-team-carousel-caption" class="carousel-caption">Our team</div>
+      </div>
+      <button class="carousel-next" aria-label="Next team photo">›</button>
+    </div>
+
+    <script id="our-team-gallery-data" type="application/json">
+[
+  {
+    "id": "Team dinner",
+    "src": "site/assets/gallery/web/Team dinner.jpg",
+    "src800": "site/assets/gallery/web/Team dinner-800w.jpg",
+    "src480": "site/assets/gallery/web/Team dinner-480w.jpg",
+    "alt": "Team Dinner"
+  },
+  {
+    "id": "Team reunion dinner",
+    "src": "site/assets/gallery/web/Team reunion dinner.jpg",
+    "src800": "site/assets/gallery/web/Team reunion dinner-800w.jpg",
+    "src480": "site/assets/gallery/web/Team reunion dinner-480w.jpg",
+    "alt": "Team Reunion Dinner"
+  }
+]
+</script>
+
+    <h2>The team at work</h2>
+    <div class="carousel" id="team-carousel" aria-roledescription="carousel">
+      <button class="carousel-prev" aria-label="Previous team photo">‹</button>
+      <div class="carousel-frame">
+     <img id="team-carousel-img"
+       src="site/assets/gallery/web/gallery_002.jpg"
+       srcset="site/assets/gallery/web/gallery_002-480w.jpg 480w, site/assets/gallery/web/gallery_002-800w.jpg 800w, site/assets/gallery/web/gallery_002.jpg 1200w"
+             sizes="(max-width:600px) 100vw, (max-width:1000px) 70vw, 60vw"
+             alt="Team at work" loading="lazy">
+        <div id="team-carousel-caption" class="carousel-caption">Team at work</div>
+      </div>
+      <button class="carousel-next" aria-label="Next team photo">›</button>
+    </div>
+    <script id="team-gallery-data" type="application/json">
+[
+  {
+    "id": "gallery_002",
+    "src": "site/assets/gallery/web/gallery_002.jpg",
+    "src800": "site/assets/gallery/web/gallery_002-800w.jpg",
+    "src480": "site/assets/gallery/web/gallery_002-480w.jpg",
+    "alt": "Sam Taking Out A Foggy Pane OF OF Glass"
+  },
+  {
+    "id": "IMG_8258",
+    "src": "site/assets/gallery/web/IMG_8258.jpg",
+    "src800": "site/assets/gallery/web/IMG_8258-800w.jpg",
+    "src480": "site/assets/gallery/web/IMG_8258-480w.jpg",
+    "alt": "Sam and JJ"
+  },
+  {
+    "id": "IMG_0908",
+    "src": "site/assets/gallery/web/IMG_0908.jpg",
+    "src800": "site/assets/gallery/web/IMG_0908-800w.jpg",
+    "src480": "site/assets/gallery/web/IMG_0908-480w.jpg",
+    "alt": "Asher and Noah Schmitty Replacing A Window Unit"
+  },
+  {
+    "id": "IMG_1539_2",
+    "src": "site/assets/gallery/web/IMG_1539_2.jpg",
+    "src800": "site/assets/gallery/web/IMG_1539_2-800w.jpg",
+    "src480": "site/assets/gallery/web/IMG_1539_2-480w.jpg",
+    "alt": "Noah Schmitty Carrying Replacement Glass"
+  },
+  {
+    "id": "IMG_2136_3",
+    "src": "site/assets/gallery/web/IMG_2136_3.jpg",
+    "src800": "site/assets/gallery/web/IMG_2136_3-800w.jpg",
+    "src480": "site/assets/gallery/web/IMG_2136_3-480w.jpg",
+    "alt": "Noah Schmitty, Sam and Asher Working ON Windows"
+  },
+  {
+    "id": "IMG_2196",
+    "src": "site/assets/gallery/web/IMG_2196.jpg",
+    "src800": "site/assets/gallery/web/IMG_2196-800w.jpg",
+    "src480": "site/assets/gallery/web/IMG_2196-480w.jpg",
+    "alt": "Asher, Installing Window Glazing Bead"
+  },
+  {
+    "id": "IMG_6286",
+    "src": "site/assets/gallery/web/IMG_6286.jpg",
+    "src800": "site/assets/gallery/web/IMG_6286-800w.jpg",
+    "src480": "site/assets/gallery/web/IMG_6286-480w.jpg",
+    "alt": "All Hands ON Deck"
+  },
+  {
+    "id": "IMG_6329",
+    "src": "site/assets/gallery/web/IMG_6329.jpg",
+    "src800": "site/assets/gallery/web/IMG_6329-800w.jpg",
+    "src480": "site/assets/gallery/web/IMG_6329-480w.jpg",
+    "alt": "New and Old Uniform Side BY Side"
+  },
+  {
+    "id": "IMG_6334",
+    "src": "site/assets/gallery/web/IMG_6334.jpg",
+    "src800": "site/assets/gallery/web/IMG_6334-800w.jpg",
+    "src480": "site/assets/gallery/web/IMG_6334-480w.jpg",
+    "alt": "New Uniforms"
+  },
+  {
+    "id": "Sam installing window glazing bead",
+    "src": "site/assets/gallery/web/Sam installing window glazing bead.png",
+    "src800": "site/assets/gallery/web/Sam installing window glazing bead-800w.jpg",
+    "src480": "site/assets/gallery/web/Sam installing window glazing bead-480w.jpg",
+    "alt": "Sam Installing Window Glazing Bead"
+  },
+  {
+    "id": "IMG_1894 2",
+    "src": "site/assets/gallery/web/IMG_1894 2.jpg",
+    "src800": "site/assets/gallery/web/IMG_1894 2-800w.jpg",
+    "src480": "site/assets/gallery/web/IMG_1894 2-480w.jpg",
+    "alt": "Image 1894 2"
+  },
+  {
+    "id": "Sam removing a foggy window glass pane",
+    "src": "site/assets/gallery/web/Sam removing a foggy window glass pane.JPG",
+    "src800": "site/assets/gallery/web/Sam removing a foggy window glass pane-800w.jpg",
+    "src480": "site/assets/gallery/web/Sam removing a foggy window glass pane-480w.jpg",
+    "alt": "Sam Removing A Foggy Window Glass Pane"
+  },
+  {
+    "id": "Asher reglazing a glass pane",
+    "src": "site/assets/gallery/web/Asher reglazing a glass pane.jpg",
+    "src800": "site/assets/gallery/web/Asher reglazing a glass pane-800w.jpg",
+    "src480": "site/assets/gallery/web/Asher reglazing a glass pane-480w.jpg",
+    "alt": "Asher Reglazing A Glass Pane"
+  },
+  {
+    "id": "Noah Schmitty adding sealant to window frame for glass replacement",
+    "src": "site/assets/gallery/web/Noah Schmitty adding sealant to window frame for glass replacement.png",
+    "src800": "site/assets/gallery/web/Noah Schmitty adding sealant to window frame for glass replacement-800w.jpg",
+    "src480": "site/assets/gallery/web/Noah Schmitty adding sealant to window frame for glass replacement-480w.jpg",
+    "alt": "Noah Schmitty Adding Sealant TO Window Frame for Glass Replacement"
+  },
+  {
+    "id": "Sam and Noah Bruckner working on a technical glass replacement",
+    "src": "site/assets/gallery/web/Sam and Noah Bruckner working on a technical glass replacement.jpg",
+    "src800": "site/assets/gallery/web/Sam and Noah Bruckner working on a technical glass replacement-800w.jpg",
+    "src480": "site/assets/gallery/web/Sam and Noah Bruckner working on a technical glass replacement-480w.jpg",
+    "alt": "Sam and Noah Bruckner Working ON A Technical Glass Replacement"
+  },
+  {
+    "id": "Asher screwing in window glazing bead",
+    "src": "site/assets/gallery/web/Asher screwing in window glazing bead.jpg",
+    "src800": "site/assets/gallery/web/Asher screwing in window glazing bead-800w.jpg",
+    "src480": "site/assets/gallery/web/Asher screwing in window glazing bead-480w.jpg",
+    "alt": "Asher Screwing IN Window Glazing Bead"
+  },
+  {
+    "id": "Noah Bruckner teaching sam",
+    "src": "site/assets/gallery/web/Noah Bruckner teaching sam.jpg",
+    "src800": "site/assets/gallery/web/Noah Bruckner teaching sam-800w.jpg",
+    "src480": "site/assets/gallery/web/Noah Bruckner teaching sam-480w.jpg",
+    "alt": "Noah Bruckner Teaching Sam"
+  },
+  {
+    "id": "Noah Schmitty, Sam and Asher all working on their respective windows",
+    "src": "site/assets/gallery/web/Noah Schmitty, Sam and Asher all working on their respective windows.jpg",
+    "src800": "site/assets/gallery/web/Noah Schmitty, Sam and Asher all working on their respective windows-800w.jpg",
+    "src480": "site/assets/gallery/web/Noah Schmitty, Sam and Asher all working on their respective windows-480w.jpg",
+    "alt": "Noah Schmitty, Sam and Asher All Working ON Their Respective Windows"
+  },
+  {
+    "id": "Noah Schmitty working on a technical large glass reglaze",
+    "src": "site/assets/gallery/web/Noah Schmitty working on a technical large glass reglaze.jpg",
+    "src800": "site/assets/gallery/web/Noah Schmitty working on a technical large glass reglaze-800w.jpg",
+    "src480": "site/assets/gallery/web/Noah Schmitty working on a technical large glass reglaze-480w.jpg",
+    "alt": "Noah Schmitty Working ON A Technical Large Glass Reglaze"
+  },
+  {
+    "id": "Asher and Noah Schmitty installing new window unit",
+    "src": "site/assets/gallery/web/Asher and Noah Schmitty installing new window unit.jpg",
+    "src800": "site/assets/gallery/web/Asher and Noah Schmitty installing new window unit-800w.jpg",
+    "src480": "site/assets/gallery/web/Asher and Noah Schmitty installing new window unit-480w.jpg",
+    "alt": "Asher and Noah Schmitty Installing New Window Unit"
+  },
+  {
+    "id": "noahschmitty",
+    "src": "site/assets/gallery/web/noahschmitty.jpg",
+    "src800": "site/assets/gallery/web/noahschmitty-800w.jpg",
+    "src480": "site/assets/gallery/web/noahschmitty-480w.jpg",
+    "alt": "Noahschmitty"
+  },
+  {
+    "id": "Noah Schmitty carrying a piece of replacement glass",
+    "src": "site/assets/gallery/web/Noah Schmitty carrying a piece of replacement glass.png",
+    "src800": "site/assets/gallery/web/Noah Schmitty carrying a piece of replacement glass-800w.jpg",
+    "src480": "site/assets/gallery/web/Noah Schmitty carrying a piece of replacement glass-480w.jpg",
+    "alt": "Noah Schmitty Carrying A Piece OF Replacement Glass"
+  },
+  {
+    "id": "Sam and jj",
+    "src": "site/assets/gallery/web/Sam and jj.jpg",
+    "src800": "site/assets/gallery/web/Sam and jj-800w.jpg",
+    "src480": "site/assets/gallery/web/Sam and jj-480w.jpg",
+    "alt": "Sam and JJ"
+  },
+  {
+    "id": "Asher and Sam disposing of old glass panes",
+    "src": "site/assets/gallery/web/Asher and Sam disposing of old glass panes.PNG",
+    "src800": "site/assets/gallery/web/Asher and Sam disposing of old glass panes-800w.jpg",
+    "src480": "site/assets/gallery/web/Asher and Sam disposing of old glass panes-480w.jpg",
+    "alt": "Asher and Sam Disposing OF Old Glass Panes"
+  },
+  {
+    "id": "All hands on deck",
+    "src": "site/assets/gallery/web/All hands on deck.jpg",
+    "src800": "site/assets/gallery/web/All hands on deck-800w.jpg",
+    "src480": "site/assets/gallery/web/All hands on deck-480w.jpg",
+    "alt": "All Hands ON Deck"
+  },
+  {
+    "id": "Large window glass replacement  project",
+    "src": "site/assets/gallery/web/Large window glass replacement  project.jpg",
+    "src800": "site/assets/gallery/web/Large window glass replacement  project-800w.jpg",
+    "src480": "site/assets/gallery/web/Large window glass replacement  project-480w.jpg",
+    "alt": "Large Window Glass Replacement Project"
+  },
+  {
+    "id": "main photo",
+    "src": "site/assets/gallery/web/main photo.png",
+    "src800": "site/assets/gallery/web/main photo-800w.jpg",
+    "src480": "site/assets/gallery/web/main photo-480w.jpg",
+    "alt": "Main Photo"
+  },
+  {
+    "id": "New versus old Pristine Windows uniforms",
+    "src": "site/assets/gallery/web/New versus old Pristine Windows uniforms.jpg",
+    "src800": "site/assets/gallery/web/New versus old Pristine Windows uniforms-800w.jpg",
+    "src480": "site/assets/gallery/web/New versus old Pristine Windows uniforms-480w.jpg",
+    "alt": "New Versus Old Pristine Windows Uniforms"
+  },
+  {
+    "id": "New uniforms",
+    "src": "site/assets/gallery/web/New uniforms.jpg",
+    "src800": "site/assets/gallery/web/New uniforms-800w.jpg",
+    "src480": "site/assets/gallery/web/New uniforms-480w.jpg",
+    "alt": "New Uniforms"
+  },
+  {
+    "id": "Asher installing a new piece of window glass",
+    "src": "site/assets/gallery/web/Asher installing a new piece of window glass.jpg",
+    "src800": "site/assets/gallery/web/Asher installing a new piece of window glass-800w.jpg",
+    "src480": "site/assets/gallery/web/Asher installing a new piece of window glass-480w.jpg",
+    "alt": "Asher Installing A New Piece OF Window Glass"
+  }
+]
+</script>
   </div>
 </section>
 
@@ -89,4 +390,5 @@
 
 
 </body>
-</html]
+<script src="site/assets/gallery.js"></script>
+</html>
