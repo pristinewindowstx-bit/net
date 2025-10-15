@@ -64,7 +64,6 @@ a:hover{text-decoration:underline}
 .cards .card{
   background:rgba(0,0,0,0.15) !important;
   border:1px solid rgba(255,255,255,0.05) !important;
-  border-left:3px solid var(--accent) !important;
   box-shadow:none !important;
   backdrop-filter:blur(4px);
 }
@@ -220,7 +219,6 @@ details{background:var(--card);border:1px solid var(--divider);border-radius:12p
 #text-call details{
   background:rgba(0,0,0,0.15) !important;
   border:1px solid rgba(255,255,255,0.05) !important;
-  border-left:3px solid var(--accent) !important;
   box-shadow:none !important;
   backdrop-filter:blur(4px);
 }
