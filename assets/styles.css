@@ -54,10 +54,8 @@ a:hover{text-decoration:underline}
 
 /* Review cards: background matching hero paragraph text (muted) for a subtle panel */
 .card.review-card{
-  /* Translucent panel using the same hue as --muted so it visually matches hero paragraph text */
-  display:block;
-  /* stronger translucent version of #9aa9b3 so panels are clearly visible */
-  background: rgba(154,169,179,0.28);
+  /* Use true black for review/service boxes so they stand out from the center tint */
+  background: var(--card) !important;
   color: var(--text);
   border:1px solid rgba(255,255,255,0.06);
   border-radius:12px;
@@ -67,7 +65,7 @@ a:hover{text-decoration:underline}
   backdrop-filter: blur(4px);
   position:relative; /* enables z-index */
   z-index:1;
-.card.review-card{margin-bottom:18px;padding:20px}
+}
 .btn{display:inline-block;padding:12px 18px;border-radius:10px;background:var(--accent);color:#fff;font-weight:700;letter-spacing:.3px}
 .btn:hover{text-decoration:none;filter:brightness(.96)}
 .btn.ghost{background:transparent;border:1.5px solid var(--accent);color:var(--accent)}
@@ -143,7 +141,7 @@ details p.faq-answer a, details p.faq-answer span, details p.faq-answer strong {
 .review-highlight{background:var(--card);color:var(--text);border-top:2px solid var(--accent);border-bottom:2px solid var(--accent)}
 .review-highlight .card{background:transparent;border:1px solid rgba(255,255,255,0.06);box-shadow:none}
 .review-highlight .card p{color:var(--text)}
-.footer .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.footer .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;background:var(--card);padding:20px;border-radius:10px}
 @media (max-width:900px){.footer .contact-grid{grid-template-columns:1fr}}
 /* footer uses card background so it reads as a dark panel */
 .footer{background:var(--card);color:var(--text)}
