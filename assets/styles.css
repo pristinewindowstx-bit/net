@@ -294,6 +294,19 @@ footer.footer a.btn.ghost {
   display:inline-block;
 }
 
+/* Red Google Review button - new specific class to avoid conflicts */
+.btn.review-btn-red {
+  background:transparent !important;
+  border:1.5px solid var(--accent) !important;
+  color:var(--accent) !important;
+  padding:12px 18px !important;
+  border-radius:10px !important;
+  font-weight:700 !important;
+  letter-spacing:.3px !important;
+  text-decoration:none !important;
+  display:inline-block !important;
+}
+
 .footer{background:var(--footer-bg);color:var(--text);margin-top:40px}
 .footer a{color:var(--ink)}
 .footer .fine{color:var(--muted)}
