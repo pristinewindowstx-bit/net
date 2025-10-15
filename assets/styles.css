@@ -17,6 +17,11 @@
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
+/* Reserve vertical scrollbar space to avoid layout shifts when content height changes
+  (prevents the page jumping up/down when carousels animate heights). */
+html{height:100%;overflow-y:scroll;scrollbar-gutter:stable both-edges}
+/* Also apply to body to cover browsers that honor body scrolling contexts */
+body{scrollbar-gutter:stable both-edges}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Inter,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
 a{color:var(--ink);text-decoration:none}
 a:hover{text-decoration:underline}
@@ -75,12 +80,25 @@ a:hover{text-decoration:underline}
 .page-hero .container{padding-top:48px;padding-bottom:24px}
 
 /* Carousel: single-image selector replacing multi-column gallery */
-.carousel{display:flex;align-items:center;justify-content:center;gap:12px;max-width:980px;margin:18px auto}
-.carousel-frame{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
-.carousel-frame img{width:100%;height:auto;max-height:760px;object-fit:contain;border-radius:12px;border:1px solid var(--divider);box-shadow:var(--shadow);background:var(--card);padding:6px}
-.carousel-prev,.carousel-next{background:rgba(0,0,0,0.06);border:none;color:var(--text);font-size:36px;width:64px;height:64px;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.carousel-prev:hover,.carousel-next:hover{filter:brightness(.96)}
-.carousel-caption{color:var(--muted);font-size:14px;text-align:center;padding:6px 10px}
+.carousel{position:relative;display:flex;align-items:center;justify-content:center;gap:12px;max-width:980px;margin:18px auto;min-height:520px}
+.carousel-frame{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;position:relative;height:auto;overflow:hidden;transition:height 420ms cubic-bezier(.22,.9,.28,1)}
+.carousel-frame img{width:100%;height:auto;max-height:760px;object-fit:contain;border-radius:12px;border:1px solid var(--divider);box-shadow:var(--shadow);background:var(--card);padding:6px;opacity:1;transition:opacity 300ms ease}
+.carousel-prev,.carousel-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.06);border:none;color:var(--text);font-size:36px;width:64px;height:64px;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:20}
+
+@media (max-width:520px){
+  .carousel-prev,.carousel-next{position:static;transform:none;width:48px;height:48px;font-size:28px;margin:6px}
+  .carousel{flex-direction:column}
+}
+
+@media (min-width:901px){
+  .carousel{min-height:640px}
+}
+@media (max-width:900px){
+  .carousel{min-height:520px}
+}
+@media (max-width:520px){
+  .carousel{min-height:380px}
+}
 
 /* Remove before/after grid quirks: ensure single-image mode doesn't create blanks */
 .beforeafter{display:block}
