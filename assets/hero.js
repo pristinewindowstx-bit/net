@@ -1,4 +1,4 @@
-// hero.js — extracted from inline scripts in index.html
+// hero.js — enhanced for slow connection optimization
 (function(){
   function setTopbar(){
     var topbar = document.querySelector('.topbar');
@@ -11,19 +11,124 @@
   setTopbar();
 })();
 
-// Try to programmatically play the hero video and manage its extent/position
+// Enhanced video management with connection-aware loading
 (function(){
+  var shouldLoadVideo = true;
+  var videoLoadStarted = false;
+  
+  // Check connection speed and device capabilities
+  function assessConnectionAndDevice() {
+    // Check for slow connection indicators
+    if (navigator.connection) {
+      var conn = navigator.connection;
+      var slowConnections = ['slow-2g', '2g', '3g'];
+      if (slowConnections.includes(conn.effectiveType)) {
+        shouldLoadVideo = false;
+        return;
+      }
+      // Also check if data saver is enabled
+      if (conn.saveData) {
+        shouldLoadVideo = false;
+        return;
+      }
+    }
+    
+    // Check for reduced motion preference
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      shouldLoadVideo = false;
+      return;
+    }
+    
+    // Check device memory (if available)
+    if (navigator.deviceMemory && navigator.deviceMemory < 4) {
+      shouldLoadVideo = false;
+      return;
+    }
+    
+    // Check viewport size (don't load video on very small screens)
+    if (window.innerWidth < 600) {
+      shouldLoadVideo = false;
+      return;
+    }
+  }
+  
+  function loadVideoWhenReady() {
+    if (!shouldLoadVideo || videoLoadStarted) return;
+    
+    var v = document.querySelector('.hero-video');
+    if (!v) return;
+    
+    videoLoadStarted = true;
+    
+    // Set preload to auto and start loading
+    v.preload = 'auto';
+    v.load();
+    
+    // Add loading indicator
+    var heroSection = document.querySelector('.hero');
+    if (heroSection) {
+      heroSection.classList.add('video-loading');
+    }
+    
+    // Handle successful load
+    v.addEventListener('canplay', function() {
+      if (heroSection) {
+        heroSection.classList.remove('video-loading');
+        heroSection.classList.add('video-loaded');
+      }
+      tryPlay();
+    });
+    
+    // Handle load error
+    v.addEventListener('error', function() {
+      v.style.display = 'none';
+      if (heroSection) {
+        heroSection.classList.remove('video-loading');
+        heroSection.classList.add('video-fallback');
+      }
+    });
+  }
+
   function tryPlay(){
     var v = document.querySelector('.hero-video');
-    if(!v) return;
+    if(!v || !shouldLoadVideo) return;
     v.muted = true; // ensure muted
     var p = v.play();
     if(p && p.catch){
       p.catch(function(err){
         console.error('hero-video play() failed:', err);
+        // Hide video on play failure
+        v.style.display = 'none';
       });
     }
   }
+
+  // Initialize connection assessment
+  assessConnectionAndDevice();
+  
+  // Load video after page interaction or after delay for good connections
+  function initVideoLoading() {
+    if (shouldLoadVideo) {
+      // For fast connections, load video after a short delay
+      setTimeout(loadVideoWhenReady, 1000);
+    }
+  }
+  
+  // Load video on user interaction for medium connections
+  function loadOnInteraction() {
+    if (shouldLoadVideo && !videoLoadStarted) {
+      loadVideoWhenReady();
+      // Remove listeners after first interaction
+      document.removeEventListener('click', loadOnInteraction);
+      document.removeEventListener('scroll', loadOnInteraction);
+      document.removeEventListener('touchstart', loadOnInteraction);
+    }
+  }
+  
+  // Set up interaction listeners for lazy loading
+  document.addEventListener('click', loadOnInteraction);
+  document.addEventListener('scroll', loadOnInteraction);
+  document.addEventListener('touchstart', loadOnInteraction);
 
   // Compute and set the hero video's height so it reaches the bottom of #text-call
   // Use requestAnimationFrame for scroll updates and CSS transform for smooth GPU-accelerated motion.
@@ -99,10 +204,16 @@
     scheduleRafUpdate();
   }
 
-  window.addEventListener('load', function(){ tryPlay(); updateHeroExtent(); });
+  window.addEventListener('load', function(){ 
+    initVideoLoading(); 
+    updateHeroExtent(); 
+  });
   window.addEventListener('resize', scheduleUpdate);
   window.addEventListener('orientationchange', scheduleUpdate);
   window.addEventListener('scroll', scheduleScroll, {passive:true});
-  // also try after a short delay in case DOM or images load late
-  setTimeout(function(){ tryPlay(); updateHeroExtent(); }, 1400);
+  // Try video loading after delay for good connections
+  setTimeout(function(){ 
+    if (shouldLoadVideo) loadVideoWhenReady(); 
+    updateHeroExtent(); 
+  }, 1400);
 })();

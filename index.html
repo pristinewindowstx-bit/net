@@ -4,6 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="Professional window cleaning, glass repair & reglazing, junk removal, and handyman services. Serving San Antonio, Austin, and the Texas Hill Country.">
+  
+  <!-- Performance optimizations -->
+  <link rel="preload" href="assets/styles.css" as="style">
+  <link rel="preload" href="assets/logo.jpg" as="image">
+  <link rel="prefetch" href="assets/hero.jpg" as="image">
+  <link rel="dns-prefetch" href="//g.page">
+  
   <title>Window Cleaning & Glass Repair | Pristine Windows TX</title>
   <meta name="description" content="Pristine Windows and Services: Window Cleaning, Glass Repair & Reglazing, Junk Removal & Hauling across the Texas Hill Country.">
   <link rel="icon" href="assets/logo.jpg">
@@ -16,7 +23,7 @@
 <header class="topbar">
   <div class="container row between center">
     <a class="brand" href="index.html">
-      <img src="assets/logo.jpg" alt="Pristine Windows and Services logo" class="logo">
+      <img src="assets/logo.jpg" alt="Pristine Windows and Services logo" class="logo" loading="eager" decoding="async">
       <span>Pristine Windows and Services</span>
     </a>
     <nav class="nav">
@@ -33,8 +40,13 @@
 
 
 <section class="hero">
-  <!-- b-roll video background (copied to top-level assets/) -->
-  <video class="hero-video" autoplay muted loop playsinline webkit-playsinline aria-hidden="true" poster="assets/hero.jpg">
+  <!-- b-roll video background - optimized for slow connections -->
+  <video class="hero-video" 
+         muted loop playsinline webkit-playsinline aria-hidden="true" 
+         poster="assets/hero.jpg"
+         preload="none"
+         oncanplay="this.play()"
+         onerror="this.style.display='none'">
     <source src="assets/hero-broll.webm" type="video/webm">
     <source src="assets/hero-broll.mp4" type="video/mp4">
   </video>

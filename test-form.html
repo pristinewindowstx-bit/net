@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Form Test | Pristine Windows</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <div class="container" style="padding: 60px 28px;">
+    <h1>Form Test (Local)</h1>
+    <p>This form will show you the data without submitting to Netlify.</p>
+    
+    <form id="test-form" name="quote">
+      <div class="grid-2">
+        <label>Full Name*<br><input name="name" required></label>
+        <label>Phone*<br><input name="phone" required></label>
+      </div>
+      <div class="grid-2">
+        <label>Email<br><input type="email" name="email"></label>
+        <label>City / Service Area*<br><input name="city" required></label>
+      </div>
+      <div class="grid-2">
+        <label>Service Type*<br>
+          <select name="service" required>
+            <option>Window Cleaning</option>
+            <option>Glass Repair & Reglazing</option>
+            <option>Junk Removal / Deliveries / Hauling</option>
+            <option>Handyman Tasks</option>
+            <option>Window Operation Repair</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <label>Ideal Timing<br><input name="timing" placeholder="e.g., this week / next week"></label>
+      </div>
+      <label>Description / Notes<br>
+        <textarea name="notes" rows="5" placeholder="Tell us briefly what you need and any access details."></textarea>
+      </label>
+      <button class="btn" type="submit">Test Form</button>
+    </form>
+    
+    <div id="results" style="margin-top: 30px; padding: 20px; background: #f5f5f5; border-radius: 8px; display: none;">
+      <h3>Form Data Preview:</h3>
+      <pre id="form-data"></pre>
+      <p><a href="thanks.html" class="btn">Test Thanks Page</a></p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('test-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(this);
+      const data = {};
+      
+      for (let [key, value] of formData.entries()) {
+        data[key] = value;
+      }
+      
+      document.getElementById('form-data').textContent = JSON.stringify(data, null, 2);
+      document.getElementById('results').style.display = 'block';
+      
+      // Scroll to results
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
