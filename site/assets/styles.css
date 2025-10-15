@@ -48,8 +48,34 @@ a:hover{text-decoration:underline}
 .page-hero{background:var(--soft);border-bottom:1px solid var(--divider)}
 .page-hero .container{padding-top:48px;padding-bottom:24px}
 
-.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.gallery img{width:100%;height:220px;object-fit:cover;border-radius:12px;border:1px solid var(--divider);box-shadow:var(--shadow)}
+/* Carousel: single-image selector replacing multi-column gallery */
+.carousel{position:relative;display:flex;align-items:center;justify-content:center;gap:12px;max-width:980px;margin:18px auto;min-height:760px}
+.carousel-frame{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;position:relative}
+.carousel-frame img{width:100%;height:auto;max-height:760px;object-fit:contain;border-radius:12px;border:1px solid var(--divider);box-shadow:var(--shadow);background:#fff;padding:6px}
+.carousel-prev,.carousel-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.06);border:none;color:var(--text);font-size:36px;width:64px;height:64px;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:20}
+.carousel-prev{left:12px}
+.carousel-next{right:12px}
+.carousel-prev:hover,.carousel-next:hover{filter:brightness(.96)}
+.carousel-caption{color:var(--muted);font-size:14px;text-align:center;padding:6px 10px}
+
+/* On small screens keep arrows inline below image to avoid overlap */
+@media (max-width:520px){
+  .carousel-prev,.carousel-next{position:static;transform:none;width:48px;height:48px;font-size:28px;margin:6px}
+  .carousel{flex-direction:column}
+}
+
+/* Reduce fixed height on smaller viewports so layout remains usable */
+@media (max-width:900px){
+  .carousel{min-height:420px}
+}
+
+@media (max-width:520px){
+  .carousel{min-height:320px}
+}
+
+/* Remove before/after grid quirks: ensure single-image mode doesn't create blanks */
+.beforeafter{display:block}
+.beforeafter img{width:100%;height:auto}
 
 details{background:var(--card);border:1px solid var(--divider);border-radius:12px;padding:14px 16px;margin-bottom:12px;box-shadow:var(--shadow)}
 
