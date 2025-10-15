@@ -1,115 +1,145 @@
-// Lightweight dependency-free lightbox for the gallery
-// - Clicking a gallery link (anchor with [data-large]) opens a full-screen overlay
-// - Escape or click outside closes it
-
+// Minimal carousel for single-image display with prev/next and keyboard support.
 (function(){
-  // Build an array of gallery items for navigation
-  function collectItems(){
-    const anchors = Array.from(document.querySelectorAll('a[data-large]'));
-    return anchors.map(a => ({
-      href: a.getAttribute('href'),
-      alt: (a.querySelector('img') && a.querySelector('img').getAttribute('alt')) || '',
-      node: a
-    }));
+  function qs(sel, ctx){ return (ctx||document).querySelector(sel); }
+  function qsa(sel, ctx){ return Array.from((ctx||document).querySelectorAll(sel)); }
+
+  function parseDataFor(container){
+    // prefer a script with id containing the container id, e.g. 'gallery-data' or 'team-gallery-data'
+    const idMatch = container.id ? document.querySelector('script[id*="' + container.id + '"]') : null;
+    if(idMatch) {
+      try{ return JSON.parse(idMatch.textContent); }catch(e){ return []; }
+    }
+    // fallback: next script sibling after the container
+    let s = container.nextElementSibling;
+    while(s){ if(s.tagName && s.tagName.toLowerCase() === 'script' && s.type === 'application/json'){
+        try{ return JSON.parse(s.textContent); }catch(e){ return []; }
+      } s = s.nextElementSibling; }
+    return [];
   }
 
-  function createOverlay(src, alt, index, total){
-    const overlay = document.createElement('div');
-    overlay.className = 'gw-overlay';
-    overlay.innerHTML = `
-      <div class="gw-inner">
-        <button class="gw-prev" aria-label="Previous">‹</button>
-        <img src="${src}" alt="${alt || ''}" class="gw-img" />
-        <button class="gw-next" aria-label="Next">›</button>
-        <div class="gw-caption">${alt || ''}</div>
-        <button class="gw-close" aria-label="Close">×</button>
-      </div>
-    `;
-    overlay.dataset.index = index;
-    overlay.dataset.total = total;
-    return overlay;
+  function Carousel(container){
+    // accept either id string or element
+    this.container = (typeof container === 'string') ? qs('#'+container) : container;
+    if(!this.container) return;
+    this.prevBtn = qs('.carousel-prev', this.container);
+    this.nextBtn = qs('.carousel-next', this.container);
+    // find image and caption inside this container
+    this.imgEl = qs('img', this.container);
+    this.captionEl = qs('.carousel-caption', this.container);
+    this.data = parseDataFor(this.container);
+    this.index = 0;
+    this.init();
   }
 
-  function open(e){
-    e.preventDefault();
-    const anchors = collectItems();
-    const a = e.currentTarget;
-    const src = a.getAttribute('href');
-    const img = a.querySelector('img');
-    const alt = img ? img.getAttribute('alt') : '';
-    const index = anchors.findIndex(it => it.href === src);
-  const overlay = createOverlay(src, alt, index, anchors.length);
-  document.body.appendChild(overlay);
-  // lock body scroll and mark open
-  document.body.classList.add('gw-open');
-  requestAnimationFrame(()=> overlay.classList.add('open'));
-
-    function navigateTo(i){
-      if(i < 0) i = anchors.length - 1;
-      if(i >= anchors.length) i = 0;
-      const next = anchors[i];
-      const imgEl = overlay.querySelector('.gw-img');
-      const cap = overlay.querySelector('.gw-caption');
-      overlay.dataset.index = i;
-      imgEl.setAttribute('src', next.href);
-      imgEl.setAttribute('alt', next.alt || '');
-      cap.textContent = next.alt || '';
-    }
-
-    function closeHandler(ev){
-      if(ev.target === overlay || ev.target.classList.contains('gw-close')){
-        overlay.classList.remove('open');
-        overlay.addEventListener('transitionend', ()=> { overlay.remove(); document.body.classList.remove('gw-open'); }, {once:true});
-        document.removeEventListener('keydown', keyHandler);
-      }
-    }
-
-    function keyHandler(ev){
-      if(ev.key === 'Escape') return closeHandler({target: overlay});
-      if(ev.key === 'ArrowLeft') return navigateTo(Number(overlay.dataset.index) - 1);
-      if(ev.key === 'ArrowRight') return navigateTo(Number(overlay.dataset.index) + 1);
-    }
-
-    overlay.addEventListener('click', function(ev){
-      // close when clicking outside inner (but ignore clicks on controls)
-      // don't close if click happened inside gw-inner
-      const inner = overlay.querySelector('.gw-inner');
-      if(inner && inner.contains(ev.target)) return;
-      if(ev.target === overlay) closeHandler({target: overlay});
+  Carousel.prototype.init = function(){
+    if(!this.data.length) return;
+    const self = this;
+    // render first image responsively
+    this.setImage(this.index);
+    // compute a stable min-height for this carousel so arrows don't shift
+    // when images change orientation. Preload natural sizes and then set
+    // a min-height equal to the tallest scaled image for the current
+    // carousel width (respecting max-height from CSS).
+    this._computeStableHeight();
+    this.prevBtn.addEventListener('click', function(){ self.prev(); });
+    this.nextBtn.addEventListener('click', function(){ self.next(); });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'ArrowLeft') self.prev();
+      if(e.key === 'ArrowRight') self.next();
     });
 
-    // prev/next button handlers (use event delegation)
-    overlay.addEventListener('click', function(ev){
-      if(ev.target.classList.contains('gw-prev')){
-        navigateTo(Number(overlay.dataset.index) - 1);
-      } else if(ev.target.classList.contains('gw-next')){
-        navigateTo(Number(overlay.dataset.index) + 1);
-      }
+    // optional: swipe support for touch
+    let startX = null;
+    this.imgEl.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
+    this.imgEl.addEventListener('touchend', function(e){
+      if(startX === null) return;
+      const endX = e.changedTouches[0].clientX;
+      const dx = endX - startX;
+      if(Math.abs(dx) > 40){ if(dx > 0) self.prev(); else self.next(); }
+      startX = null;
     });
+  };
 
-    document.addEventListener('keydown', keyHandler);
-    // preload neighbors for snappy navigation
-    function preloadNeighbor(i){
-      if(!anchors[i]) return;
-      const p = new Image(); p.src = anchors[i].href;
+  // debounce helper
+  function debounce(fn, wait){ let t; return function(){ clearTimeout(t); t = setTimeout(()=>fn.apply(this, arguments), wait); }; }
+
+  Carousel.prototype._computeStableHeight = function(){
+    const self = this;
+    // collect src candidates for measurement (prefer src800 then src)
+    const srcs = this.data.map(it => it.src800 || it.src).filter(Boolean);
+    if(!srcs.length) return;
+    let loaded = 0;
+    const sizes = [];
+    const maxCssHeight = 760; // matches CSS max-height for images
+    srcs.forEach((s, idx) => {
+      const img = new Image();
+      img.onload = function(){
+        // natural sizes
+        const nw = img.naturalWidth || img.width;
+        const nh = img.naturalHeight || img.height;
+        sizes[idx] = {w: nw, h: nh};
+        loaded++;
+        if(loaded === srcs.length) {
+          // all loaded, compute scaled heights based on current container width
+          self._applyStableHeight(sizes, maxCssHeight);
+          // recompute on resize (debounced)
+          const onResize = debounce(function(){ self._applyStableHeight(sizes, maxCssHeight); }, 120);
+          window.addEventListener('resize', onResize);
+        }
+      };
+      img.onerror = function(){ loaded++; sizes[idx] = null; if(loaded === srcs.length){ self._applyStableHeight(sizes, maxCssHeight); } };
+      img.src = s;
+    });
+  };
+
+  Carousel.prototype._applyStableHeight = function(sizes, maxCssHeight){
+    // compute available width for image inside the carousel frame
+    const frame = this.imgEl; // the img element scales to container width
+    const containerWidth = Math.max(200, frame.clientWidth || this.container.clientWidth || 600);
+    let maxScaled = 0;
+    sizes.forEach(sz => {
+      if(!sz) return;
+      const scaled = Math.min(maxCssHeight, Math.round(containerWidth * (sz.h / sz.w)));
+      if(scaled > maxScaled) maxScaled = scaled;
+    });
+    if(maxScaled > 0){
+      // set min-height on the carousel container so arrows stay vertically centered
+      this.container.style.minHeight = (maxScaled + 48) + 'px'; // add small padding for caption/buttons
     }
-    preloadNeighbor(index-1);
-    preloadNeighbor(index+1);
-  }
+  };
+
+  Carousel.prototype.setImage = function(i){
+    if(!this.data[i]) return;
+    const item = this.data[i];
+    // choose best src available (prefer src800 then src)
+    const width = Math.min(window.innerWidth, 1200);
+    const src = (width <= 480 && item.src480) ? item.src480 : (item.src800 ? item.src800 : item.src);
+    // update both src and srcset so the browser picks the right file
+    this.imgEl.setAttribute('src', src);
+    // build a matching srcset if smaller variants exist
+    const parts = [];
+    if(item.src480) parts.push(item.src480 + ' 480w');
+    if(item.src800) parts.push(item.src800 + ' 800w');
+    if(item.src) parts.push(item.src + ' 1200w');
+    if(parts.length) this.imgEl.setAttribute('srcset', parts.join(', '));
+    this.imgEl.setAttribute('alt', item.alt || '');
+    this.captionEl.textContent = item.alt || '';
+    this.index = i;
+    // preload neighbors
+    this.preload(i-1); this.preload(i+1);
+  };
+
+  Carousel.prototype.prev = function(){
+    const next = (this.index - 1 + this.data.length) % this.data.length; this.setImage(next);
+  };
+  Carousel.prototype.next = function(){
+    const next = (this.index + 1) % this.data.length; this.setImage(next);
+  };
+
+  Carousel.prototype.preload = function(i){ if(!this.data[i]) return; const p = new Image(); p.src = this.data[i].src800 || this.data[i].src; };
 
   document.addEventListener('DOMContentLoaded', function(){
-    const links = document.querySelectorAll('a[data-large]');
-    links.forEach(l => {
-      l.addEventListener('click', open);
-      l.dataset.gwBound = '1';
-    });
-
-    // safety: prevent default navigation for any a[data-large] if JS didn't bind
-    document.addEventListener('click', function(e){
-      const a = e.target.closest && e.target.closest('a[data-large]');
-      if(a && a.dataset.gwBound !== '1'){
-        e.preventDefault();
-      }
-    });
+    const containers = qsa('.carousel');
+    containers.forEach(c => { new Carousel(c); });
   });
 })();
