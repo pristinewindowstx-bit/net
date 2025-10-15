@@ -60,6 +60,14 @@ a:hover{text-decoration:underline}
 .card{background:var(--card);border:1px solid var(--divider);border-radius:16px;padding:22px;box-shadow:var(--shadow)}
 .card h3{margin:0 0 6px}
 
+/* Make service cards transparent on main page */
+.cards .card{
+  background:transparent !important;
+  border:1px solid rgba(255,255,255,0.1) !important;
+  box-shadow:none !important;
+  backdrop-filter:blur(4px);
+}
+
 /* Review cards: background matching hero paragraph text (muted) for a subtle panel */
 .card.review-card{
   /* Use true black for review/service boxes so they stand out from the center tint */
@@ -206,6 +214,14 @@ a:hover{text-decoration:underline}
 body.gw-open{overflow:hidden;height:100vh}
 
 details{background:var(--card);border:1px solid var(--divider);border-radius:12px;padding:14px 16px;margin-bottom:12px;box-shadow:var(--shadow)}
+
+/* Make "Prefer to text or call" box transparent */
+#text-call details{
+  background:transparent !important;
+  border:1px solid rgba(255,255,255,0.1) !important;
+  box-shadow:none !important;
+  backdrop-filter:blur(4px);
+}
 
 .footer{background:var(--footer-bg);color:var(--text);margin-top:40px}
 .footer a{color:var(--ink)}
