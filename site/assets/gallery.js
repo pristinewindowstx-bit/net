@@ -1,5 +1,11 @@
 // Minimal carousel for single-image display with prev/next and keyboard support.
 (function(){
+  // Startup probe: helps determine whether the script executes in the browser
+  try {
+    console.log('[gallery.js] script loaded');
+  } catch (e) {
+    // ignore in non-browser environments
+  }
   function qs(sel, ctx){ return (ctx||document).querySelector(sel); }
   function qsa(sel, ctx){ return Array.from((ctx||document).querySelectorAll(sel)); }
 
@@ -166,7 +172,13 @@
   Carousel.prototype.stopAutoplay = function(){ if(this._autoplayId){ clearInterval(this._autoplayId); this._autoplayId = null; } };
 
   document.addEventListener('DOMContentLoaded', function(){
-    const containers = qsa('.carousel');
-    containers.forEach(c => { new Carousel(c); });
+    try {
+      console.log('[gallery.js] DOMContentLoaded — initializing carousels');
+      const containers = qsa('.carousel');
+      containers.forEach(c => { try { new Carousel(c); } catch (err) { console.error('[gallery.js] carousel init error', err); } });
+      console.log('[gallery.js] initialization complete —', containers.length, 'carousels');
+    } catch (err) {
+      console.error('[gallery.js] initialization failed', err);
+    }
   });
 })();
