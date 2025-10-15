@@ -34,7 +34,8 @@ a:hover{text-decoration:underline}
 .center{align-items:center}
 .grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
 .grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
-@media (max-width:900px){.grid-2,.grid-3{grid-template-columns:1fr} .nav{display:none}}
+.grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+@media (max-width:900px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr} .nav{display:none}}
 
 .topbar{position:sticky;top:0;background:var(--topbar-bg);border-bottom:1px solid rgba(255,255,255,0.03);backdrop-filter:saturate(120%) blur(6px);z-index:60}
 .brand{display:flex;gap:12px;align-items:center;font-weight:800;color:var(--text);letter-spacing:.2px}
@@ -62,10 +63,17 @@ a:hover{text-decoration:underline}
 
 /* Make service cards transparent on main page */
 .cards .card{
-  background:rgba(0,0,0,0.15) !important;
+  background:rgba(0,0,0,0.04) !important;
   border:1px solid rgba(255,255,255,0.05) !important;
   box-shadow:none !important;
-  backdrop-filter:blur(4px);
+  backdrop-filter:blur(1px);
+}
+
+/* Mobile: make even more transparent */
+@media (max-width: 767px) {
+  .cards .card{
+    background:rgba(0,0,0,0.02) !important;
+  }
 }
 
 /* Review cards: background matching hero paragraph text (muted) for a subtle panel */
@@ -217,10 +225,73 @@ details{background:var(--card);border:1px solid var(--divider);border-radius:12p
 
 /* Make "Prefer to text or call" box transparent */
 #text-call details{
-  background:rgba(0,0,0,0.15) !important;
+  background:rgba(0,0,0,0.04) !important;
   border:1px solid rgba(255,255,255,0.05) !important;
   box-shadow:none !important;
-  backdrop-filter:blur(4px);
+  backdrop-filter:blur(1px);
+}
+
+/* Mobile: make "text or call" box more transparent too */
+@media (max-width: 767px) {
+  #text-call details{
+    background:rgba(0,0,0,0.02) !important;
+  }
+}
+
+/* Style Google review button in footer to match red Text/Call button */
+.footer .btn.ghost {
+  background:transparent !important;
+  border:1.5px solid var(--accent) !important;
+  color:var(--accent) !important;
+  padding:12px 18px;
+  border-radius:10px;
+  font-weight:700;
+  letter-spacing:.3px;
+}
+
+/* More specific selector for the Google review link */
+.footer a[href*="google.com"].btn.ghost,
+.footer a[href*="g.page"].btn.ghost {
+  background:transparent !important;
+  border:1.5px solid var(--accent) !important;
+  color:var(--accent) !important;
+  font-weight:700;
+  letter-spacing:.3px;
+}
+
+/* Even more specific selector to override any caching issues */
+footer.footer a.btn.ghost {
+  background:transparent !important;
+  border:1.5px solid var(--accent) !important;
+  color:var(--accent) !important;
+  font-weight:700 !important;
+  letter-spacing:.3px !important;
+  text-decoration:none !important;
+}
+
+/* Mobile: keep red styling */
+@media (max-width: 767px) {
+  .footer .btn.ghost,
+  .footer a[href*="google.com"].btn.ghost,
+  .footer a[href*="g.page"].btn.ghost,
+  footer.footer a.btn.ghost {
+    background:transparent !important;
+    border:1.5px solid var(--accent) !important;
+    color:var(--accent) !important;
+  }
+}
+
+/* Red "View All Services" button */
+.btn.services-btn {
+  background:transparent !important;
+  border:1.5px solid var(--accent) !important;
+  color:var(--accent) !important;
+  padding:12px 18px;
+  border-radius:10px;
+  font-weight:700;
+  letter-spacing:.3px;
+  text-decoration:none;
+  display:inline-block;
 }
 
 .footer{background:var(--footer-bg);color:var(--text);margin-top:40px}
