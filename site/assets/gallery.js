@@ -28,6 +28,11 @@
     this.captionEl = qs('.carousel-caption', this.container);
     this.data = parseDataFor(this.container);
     this.index = 0;
+    // autoplay config per container via data attributes
+    this.autoplay = (this.container.dataset.autoplay === 'true');
+    this.autoplayInterval = parseInt(this.container.dataset.interval || this.container.dataset.autoplayInterval || 4000, 10);
+    this.autoplayDirection = (this.container.dataset.direction === 'prev') ? 'prev' : 'next';
+    this.pauseOnHover = this.container.dataset.pauseOnHover !== 'false';
     this.init();
   }
 
@@ -58,6 +63,16 @@
       if(Math.abs(dx) > 40){ if(dx > 0) self.prev(); else self.next(); }
       startX = null;
     });
+
+    // autoplay: start if enabled
+    if(this.autoplay){ this.startAutoplay(); }
+    // pause on hover/focus
+    if(this.pauseOnHover){
+      this.container.addEventListener('mouseenter', function(){ self.stopAutoplay(); });
+      this.container.addEventListener('mouseleave', function(){ self.startAutoplay(); });
+      this.container.addEventListener('focusin', function(){ self.stopAutoplay(); });
+      this.container.addEventListener('focusout', function(){ self.startAutoplay(); });
+    }
   };
 
   // debounce helper
@@ -127,6 +142,8 @@
     this.index = i;
     // preload neighbors
     this.preload(i-1); this.preload(i+1);
+    // reset autoplay timer after manual navigation to give users time
+    if(this.autoplay){ this.stopAutoplay(); this.startAutoplay(); }
   };
 
   Carousel.prototype.prev = function(){
@@ -137,6 +154,16 @@
   };
 
   Carousel.prototype.preload = function(i){ if(!this.data[i]) return; const p = new Image(); p.src = this.data[i].src800 || this.data[i].src; };
+
+  Carousel.prototype.startAutoplay = function(){
+    const self = this;
+    if(!this.autoplay) return;
+    this._autoplayId = setInterval(function(){
+      if(self.autoplayDirection === 'prev') self.prev(); else self.next();
+    }, Math.max(800, this.autoplayInterval));
+  };
+
+  Carousel.prototype.stopAutoplay = function(){ if(this._autoplayId){ clearInterval(this._autoplayId); this._autoplayId = null; } };
 
   document.addEventListener('DOMContentLoaded', function(){
     const containers = qsa('.carousel');

@@ -33,6 +33,11 @@
 
 
 <section class="hero">
+  <!-- b-roll video background (copied to top-level assets/) -->
+  <video class="hero-video" autoplay muted loop playsinline webkit-playsinline aria-hidden="true" poster="assets/hero.jpg">
+    <source src="assets/hero-broll.webm" type="video/webm">
+    <source src="assets/hero-broll.mp4" type="video/mp4">
+  </video>
   <div class="hero-media" style="background-image:url('assets/hero.jpg')"></div>
   <div class="container">
     <div class="hero-inner">
@@ -143,12 +148,15 @@
       </div>
     </div>
     <div class="footnote row between center">
-      <span>© 2025 Pristine Windows and Services. All rights reserved.</span>
+      <span id="footer-datetime">© 2025 Pristine Windows and Services. All rights reserved.</span>
       <a class="btn small" href="index.html#quote-form">Request a Quote</a>
     </div>
   </div>
 </footer>
 
+<script src="assets/footer-datetime.js"></script>
+
 
 </body>
 </html>
+<script src="assets/hero.js"></script>
