@@ -17,6 +17,9 @@
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
+/* Reserve vertical scrollbar space to avoid layout shifts when content height changes */
+html{height:100%;overflow-y:scroll;scrollbar-gutter:stable both-edges}
+body{scrollbar-gutter:stable both-edges}
 /* Reserve vertical scrollbar space to avoid layout shifts when content height changes
   (prevents the page jumping up/down when carousels animate heights). */
 html{height:100%;overflow-y:scroll;scrollbar-gutter:stable both-edges}
