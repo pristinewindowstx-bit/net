@@ -11,99 +11,45 @@
   setTopbar();
 })();
 
-// Enhanced video management with connection-aware loading
+// hero.js — simple video management
 (function(){
-  var shouldLoadVideo = true;
-  var videoLoadStarted = false;
-  
-  // Check connection speed and device capabilities
-  function assessConnectionAndDevice() {
-    // Check for slow connection indicators
-    if (navigator.connection) {
-      var conn = navigator.connection;
-      var slowConnections = ['slow-2g', '2g'];
-      if (slowConnections.includes(conn.effectiveType)) {
-        shouldLoadVideo = false;
-        return;
-      }
-      // Only skip on data saver if connection is also slow
-      if (conn.saveData && slowConnections.includes(conn.effectiveType)) {
-        shouldLoadVideo = false;
-        return;
-      }
-    }
-    
-    // Check for reduced motion preference
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      shouldLoadVideo = false;
-      return;
-    }
-    
-    // Only skip on very low memory devices
-    if (navigator.deviceMemory && navigator.deviceMemory < 2) {
-      shouldLoadVideo = false;
-      return;
-    }
+  function setTopbar(){
+    var topbar = document.querySelector('.topbar');
+    if(!topbar) return;
+    var rect = topbar.getBoundingClientRect();
+    document.documentElement.style.setProperty('--topbar-height', Math.round(rect.height) + 'px');
   }
-  
-  function loadVideoWhenReady() {
-    var v = document.querySelector('.hero-video');
-    if (!v) return;
-    
-    // If we shouldn't load video, hide it and show fallback
-    if (!shouldLoadVideo) {
-      v.style.display = 'none';
-      var heroSection = document.querySelector('.hero');
-      if (heroSection) {
-        heroSection.classList.add('video-fallback');
-      }
-      return;
-    }
-    
-    if (videoLoadStarted) return;
-    videoLoadStarted = true;
-    
-    // Add loading indicator
-    var heroSection = document.querySelector('.hero');
-    if (heroSection) {
-      heroSection.classList.add('video-loading');
-    }
-    
-    // Handle successful load
-    v.addEventListener('canplay', function() {
-      if (heroSection) {
-        heroSection.classList.remove('video-loading');
-        heroSection.classList.add('video-loaded');
-      }
-    });
-    
-    // Handle load error
-    v.addEventListener('error', function() {
-      v.style.display = 'none';
-      if (heroSection) {
-        heroSection.classList.remove('video-loading');
-        heroSection.classList.add('video-fallback');
-      }
-    });
-  }
+  window.addEventListener('resize', setTopbar);
+  window.addEventListener('load', setTopbar);
+  setTopbar();
+})();
 
-  function tryPlay(){
+// Simple video handling - let browser autoplay work naturally
+(function(){
+  function ensureVideoPlays(){
     var v = document.querySelector('.hero-video');
-    if(!v || !shouldLoadVideo) return;
-    v.muted = true; // ensure muted
-    var p = v.play();
-    if(p && p.catch){
-      p.catch(function(err){
-        console.error('hero-video play() failed:', err);
-        // Hide video on play failure
-        v.style.display = 'none';
+    if(!v) return;
+    
+    // Simple fallback if autoplay fails
+    if(v.paused){
+      v.play().catch(function(err){
+        console.log('Video autoplay blocked by browser policy');
       });
     }
   }
 
-  // Initialize connection assessment and load video if appropriate
-  assessConnectionAndDevice();
-  
+  // Basic error handling
+  var v = document.querySelector('.hero-video');
+  if(v){
+    v.addEventListener('error', function(){
+      console.log('Video failed to load');
+      v.style.display = 'none';
+    });
+    
+    // Try to ensure video plays after a short delay
+    setTimeout(ensureVideoPlays, 1000);
+  }
+
   // Compute and set the hero video's height so it reaches the bottom of #text-call
   // Use requestAnimationFrame for scroll updates and CSS transform for smooth GPU-accelerated motion.
   var rafScheduled = false;
@@ -179,15 +125,13 @@
   }
 
   window.addEventListener('load', function(){ 
-    loadVideoWhenReady(); 
     updateHeroExtent(); 
   });
   window.addEventListener('resize', scheduleUpdate);
   window.addEventListener('orientationchange', scheduleUpdate);
   window.addEventListener('scroll', scheduleScroll, {passive:true});
-  // Check video loading immediately
+  // Initial setup
   setTimeout(function(){ 
-    loadVideoWhenReady(); 
     updateHeroExtent(); 
   }, 100);
 })();
