@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Text Readability Comparison | Pristine Windows</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <style>
+    /* Override for blur box version */
+    .hero-inner.blur-version {
+      padding: 32px 28px !important;
+      margin: 20px 0 !important;
+      background: rgba(0,0,0,0.15) !important;
+      backdrop-filter: blur(2px) !important;
+      border-radius: 12px !important;
+    }
+    .comparison-label {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      background: rgba(225,6,0,0.9);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: bold;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+<header class="topbar">
+  <div class="container">
+    <div class="row between center">
+      <div class="brand">
+        <img src="assets/logo.jpg" alt="Pristine Windows and Services logo" class="logo" loading="eager" decoding="async">
+        <span>Pristine Windows</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="comparison-label">WITH BLUR BOX</div>
+  <video class="hero-video" 
+         autoplay muted loop playsinline webkit-playsinline 
+         poster="assets/hero.jpg"
+         preload="auto">
+    <source src="assets/hero-broll.webm" type="video/webm">
+    <source src="assets/hero-broll.mp4" type="video/mp4">
+  </video>
+  <div class="hero-media" style="background-image:url('assets/hero.jpg')"></div>
+  <div class="container">
+    <div class="hero-inner blur-version">
+      <h1>Crystal-clear windows. Hassle-free service.</h1>
+      <p>Window cleaning, glass repair & reglazing, junk removal, and handyman services — Hill Country & I‑35 corridor.</p>
+      <p class="trust">Professional • Licensed • Insured • Hill Country</p>
+      <div style="margin-top: 24px;">
+        <a class="btn quote" href="#quote-form">Request a Quote</a>
+        <a class="btn ghost" href="#text-call">Text / Call</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="assets/hero.js"></script>
+</body>
+</html>

@@ -32,27 +32,48 @@
 </header>
 
 
-<section class="hero">
-  <div class="hero-media" style="background-image:url('assets/hero.jpg')"></div>
-  <div class="container">
-    <div class="hero-inner">
-      <h1>Crystal-clear windows. Hassle-free service.</h1>
-      <p>Window cleaning, glass repair & reglazing, and junk removal — Hill Country & I‑35 corridor.</p>
-      <div class="actions">
-        <a class="btn quote" href="index.html#quote-form">Request a Quote</a>
+<!-- wrapper so the video can span multiple sections (hero → cards → text-call) -->
+<div class="hero-wrap">
+  <!-- b-roll video background: place your MP4/WebM files in site/assets/ and update sources as needed -->
+  <video class="hero-video" autoplay muted loop playsinline aria-hidden="true">
+    <source src="assets/hero-broll.webm" type="video/webm">
+    <source src="assets/hero-broll.mp4" type="video/mp4">
+    <!-- video will have an image fallback via the .hero-media element below for very old browsers -->
+  </video>
+
+  <div class="hero-compact">
+    <div class="stack-item">
+      <div class="stack-inner"><h1><span class="clip">Crystal-clear windows. Hassle-free service.</span></h1></div>
+    </div>
+    <div class="stack-item">
+      <div class="stack-inner"><p><span class="clip">Window cleaning, glass repair & reglazing, and junk removal — Hill Country & I‑35 corridor.</span></p></div>
+    </div>
+    <div class="stack-item actions-row">
+      <div class="stack-inner actions"><a class="btn quote" href="index.html#quote-form">Request a Quote</a>
         <a class="btn ghost" href="#text-call">Text / Call</a>
       </div>
-      <div class="trust">
-        <span>Insured • Free estimates • Fast scheduling • Up-front quotes</span>
-      </div>
+    </div>
+    <div class="stack-item trust-row">
+      <div class="stack-inner"><p><span class="clip">Insured • Free estimates • Fast scheduling • Up-front quotes</span></p></div>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="hero-media" style="background-image:url('assets/hero.jpg')"></div>
+    <div class="hero-inner">
+      <!-- hero-compact moved outside the container to allow full-bleed left alignment -->
+    </div>
     </div>
   </div>
 </section>
 
+  </div>
+</div>
+
 
 <section class="section">
   <div class="container">
-    <div class="grid-3 cards">
+    <div class="grid-4 cards">
       <div class="card">
         <h3>Window Cleaning</h3>
         <p>Streak-free interior/exterior cleaning for homes and small businesses. Screens, tracks, and sills on request.</p>
@@ -65,7 +86,12 @@
         <h3>Junk Removal & Hauling</h3>
         <p>From single-item pickups to <strong>junk cleanouts</strong>. We also do product deliveries.</p>
       </div>
+      <div class="card">
+        <h3>Handyman Services</h3>
+        <p>Minor repairs, window bead installation, and glazing, plus general handyman tasks.</p>
+      </div>
     </div>
+    <p style="text-align:center;margin-top:18px;"><a class="btn" href="services.html">View all services</a></p>
   </div>
 </section>
 
@@ -118,6 +144,9 @@
 
 
 
+  </div>
+</div>
+
 <footer class="footer">
   <div class="container">
     <div class="contact-grid">
@@ -151,4 +180,55 @@
 
 
 </body>
+<script>
+  // Position hero-compact exactly under the logo: measure logo and hero-wrap and set CSS vars
+  (function(){
+    function placeHeroCompact(){
+      // measure the .brand element (logo + brand text) so blocks align under the full brand
+      var brand = document.querySelector('.brand');
+      var topbar = document.querySelector('.topbar');
+      var heroWrap = document.querySelector('.hero-wrap');
+      var compact = document.querySelector('.hero-compact');
+      if(!brand || !topbar || !heroWrap || !compact) return;
+      var brandRect = brand.getBoundingClientRect();
+      var topbarRect = topbar.getBoundingClientRect();
+      var heroRect = heroWrap.getBoundingClientRect();
+      // set topbar height CSS var so we can add padding to the hero-wrap and avoid overlap
+      document.documentElement.style.setProperty('--topbar-height', Math.round(topbarRect.height) + 'px');
+      // Compute top/left relative to hero-wrap so CSS absolute positions line up
+      var top = (brandRect.bottom - heroRect.top);
+      var left = (brandRect.left - heroRect.left);
+  // Add a small safety offset so the top of the block doesn't get clipped by the sticky header
+  top = top + 18;
+      // Use integer pixels to avoid subpixel gaps
+      document.documentElement.style.setProperty('--hero-compact-top', Math.round(top) + 'px');
+      document.documentElement.style.setProperty('--hero-compact-left', Math.round(left) + 'px');
+    }
+    window.addEventListener('resize', placeHeroCompact);
+    window.addEventListener('scroll', placeHeroCompact);
+    document.addEventListener('DOMContentLoaded', placeHeroCompact);
+    // run once now in case DOM is already ready
+    placeHeroCompact();
+  })();
+  // Prefill quote form service based on ?service= parameter and scroll to form
+  (function(){
+    function getParam(name){
+      const url = new URL(window.location.href);
+      return url.searchParams.get(name);
+    }
+    const svc = getParam('service');
+    if(!svc) return;
+    document.addEventListener('DOMContentLoaded', function(){
+      const sel = document.querySelector('select[name="service"]');
+      if(sel){
+        const opt = Array.from(sel.options).find(o => o.value.toLowerCase() === svc.toLowerCase() || o.text.toLowerCase() === svc.toLowerCase());
+        if(opt){ sel.value = opt.value; }
+        else { sel.value = 'Other'; }
+      }
+      // scroll to the quote form anchor
+      const anchor = document.getElementById('quote-form');
+      if(anchor) anchor.scrollIntoView({behavior:'smooth'});
+    });
+  })();
+</script>
 </html>

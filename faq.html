@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FAQ | Pristine Windows TX</title>
   <link rel="icon" href="assets/logo.jpg">
-  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/styles.css?v=2025101603">
 </head>
 <body>
 <header class="topbar">
@@ -22,8 +22,21 @@
       <a href="reviews.html">Reviews</a>
       <a href="faq.html">FAQ</a>
       <a class="btn quote" href="index.html#quote-form">Request a Quote</a>
-      <a class="btn ghost" href="index.html#text-call">Text / Call</a>
+      <a class="btn ghost" href="#contact">Text / Call</a>
     </nav>
+    <!-- Simple Mobile Navigation -->
+    <div class="mobile-menu">
+      <button class="mobile-btn" id="mobileMenuBtn">Menu</button>
+      <div class="mobile-dropdown" id="mobileDropdown">
+        <a href="services.html">Services</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="about.html">About</a>
+        <a href="reviews.html">Reviews</a>
+        <a href="faq.html">FAQ</a>
+        <a href="index.html#quote-form">Request a Quote</a>
+        <a href="#contact">Text / Call</a>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -75,7 +88,7 @@
 <footer class="footer">
   <div class="container">
     <div class="contact-grid">
-      <div>
+      <div id="contact">
         <h4>Contact</h4>
         <p><strong>Phone:</strong> <a href="tel:+12108162973">+1 (210) 816-2973</a><br>
         <strong>Email:</strong> <a href="mailto:pristinewindowstx@gmail.com">pristinewindowstx@gmail.com</a><br>
@@ -103,6 +116,42 @@
 </footer>
 
 <script src="assets/footer-datetime.js"></script>
+
+<script>
+// Simple mobile menu toggle
+document.addEventListener('DOMContentLoaded', function() {
+  const btn = document.getElementById('mobileMenuBtn');
+  const dropdown = document.getElementById('mobileDropdown');
+  
+  if (btn && dropdown) {
+    btn.addEventListener('click', function() {
+      if (dropdown.classList.contains('show')) {
+        dropdown.classList.remove('show');
+        btn.textContent = 'Menu';
+      } else {
+        dropdown.classList.add('show');
+        btn.textContent = 'Close';
+      }
+    });
+
+    // Close when clicking outside
+    document.addEventListener('click', function(event) {
+      if (!btn.contains(event.target) && !dropdown.contains(event.target)) {
+        dropdown.classList.remove('show');
+        btn.textContent = 'Menu';
+      }
+    });
+
+    // Close when clicking a link
+    dropdown.addEventListener('click', function(event) {
+      if (event.target.tagName === 'A') {
+        dropdown.classList.remove('show');
+        btn.textContent = 'Menu';
+      }
+    });
+  }
+});
+</script>
 
 </body>
 </html>

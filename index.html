@@ -14,7 +14,7 @@
   <title>Window Cleaning & Glass Repair | Pristine Windows TX</title>
   <meta name="description" content="Pristine Windows and Services: Window Cleaning, Glass Repair & Reglazing, Junk Removal & Hauling across the Texas Hill Country.">
   <link rel="icon" href="assets/logo.jpg">
-  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/styles.css?v=2025101603">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LocalBusiness", "name": "Pristine Windows and Services", "url": "https://example.com", "telephone": "+1-210-816-2973", "areaServed": "San Antonio, Austin, and the Texas Hill Country", "image": "assets/logo.jpg", "sameAs": ["https://g.page/r/CR6IqRa9f49vEAI/review"]}</script>
 </head>
 
@@ -33,8 +33,21 @@
       <a href="reviews.html">Reviews</a>
       <a href="faq.html">FAQ</a>
       <a class="btn quote" href="index.html#quote-form">Request a Quote</a>
-      <a class="btn ghost" href="#text-call">Text / Call</a>
+      <a class="btn ghost" href="#contact">Text / Call</a>
     </nav>
+    <!-- Simple Mobile Navigation -->
+    <div class="mobile-menu">
+      <button class="mobile-btn" id="mobileMenuBtn">Menu</button>
+      <div class="mobile-dropdown" id="mobileDropdown">
+        <a href="services.html">Services</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="about.html">About</a>
+        <a href="reviews.html">Reviews</a>
+        <a href="faq.html">FAQ</a>
+        <a href="index.html#quote-form">Request a Quote</a>
+        <a href="#contact">Text / Call</a>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -55,7 +68,7 @@
       <p>Window cleaning, glass repair & reglazing, junk removal, and handyman services — Hill Country & I‑35 corridor.</p>
       <div class="actions">
         <a class="btn quote" href="index.html#quote-form">Request a Quote</a>
-        <a class="btn ghost" href="#text-call">Text / Call</a>
+        <a class="btn ghost" href="#contact">Text / Call</a>
       </div>
       <div class="trust">
         <span>Insured • Free estimates • Fast scheduling • Up-front quotes</span>
@@ -143,7 +156,7 @@
 <footer class="footer">
   <div class="container">
     <div class="contact-grid">
-      <div>
+      <div id="contact">
         <h4>Contact</h4>
         <p><strong>Phone:</strong> <a href="tel:+12108162973">+1 (210) 816-2973</a><br>
         <strong>Email:</strong> <a href="mailto:pristinewindowstx@gmail.com">pristinewindowstx@gmail.com</a><br>
@@ -172,7 +185,41 @@
 </footer>
 
 <script src="assets/footer-datetime.js"></script>
+<script>
+// Simple mobile menu toggle
+document.addEventListener('DOMContentLoaded', function() {
+  const btn = document.getElementById('mobileMenuBtn');
+  const dropdown = document.getElementById('mobileDropdown');
+  
+  if (btn && dropdown) {
+    btn.addEventListener('click', function() {
+      if (dropdown.classList.contains('show')) {
+        dropdown.classList.remove('show');
+        btn.textContent = 'Menu';
+      } else {
+        dropdown.classList.add('show');
+        btn.textContent = 'Close';
+      }
+    });
 
+    // Close when clicking outside
+    document.addEventListener('click', function(event) {
+      if (!btn.contains(event.target) && !dropdown.contains(event.target)) {
+        dropdown.classList.remove('show');
+        btn.textContent = 'Menu';
+      }
+    });
+
+    // Close when clicking a link
+    dropdown.addEventListener('click', function(event) {
+      if (event.target.tagName === 'A') {
+        dropdown.classList.remove('show');
+        btn.textContent = 'Menu';
+      }
+    });
+  }
+});
+</script>
 
 </body>
 </html>
