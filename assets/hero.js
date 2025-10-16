@@ -21,13 +21,13 @@
     // Check for slow connection indicators
     if (navigator.connection) {
       var conn = navigator.connection;
-      var slowConnections = ['slow-2g', '2g', '3g'];
+      var slowConnections = ['slow-2g', '2g'];
       if (slowConnections.includes(conn.effectiveType)) {
         shouldLoadVideo = false;
         return;
       }
-      // Also check if data saver is enabled
-      if (conn.saveData) {
+      // Only skip on data saver if connection is also slow
+      if (conn.saveData && slowConnections.includes(conn.effectiveType)) {
         shouldLoadVideo = false;
         return;
       }
@@ -39,30 +39,29 @@
       return;
     }
     
-    // Check device memory (if available)
-    if (navigator.deviceMemory && navigator.deviceMemory < 4) {
-      shouldLoadVideo = false;
-      return;
-    }
-    
-    // Check viewport size (don't load video on very small screens)
-    if (window.innerWidth < 600) {
+    // Only skip on very low memory devices
+    if (navigator.deviceMemory && navigator.deviceMemory < 2) {
       shouldLoadVideo = false;
       return;
     }
   }
   
   function loadVideoWhenReady() {
-    if (!shouldLoadVideo || videoLoadStarted) return;
-    
     var v = document.querySelector('.hero-video');
     if (!v) return;
     
-    videoLoadStarted = true;
+    // If we shouldn't load video, hide it and show fallback
+    if (!shouldLoadVideo) {
+      v.style.display = 'none';
+      var heroSection = document.querySelector('.hero');
+      if (heroSection) {
+        heroSection.classList.add('video-fallback');
+      }
+      return;
+    }
     
-    // Set preload to auto and start loading
-    v.preload = 'auto';
-    v.load();
+    if (videoLoadStarted) return;
+    videoLoadStarted = true;
     
     // Add loading indicator
     var heroSection = document.querySelector('.hero');
@@ -76,7 +75,6 @@
         heroSection.classList.remove('video-loading');
         heroSection.classList.add('video-loaded');
       }
-      tryPlay();
     });
     
     // Handle load error
@@ -103,33 +101,9 @@
     }
   }
 
-  // Initialize connection assessment
+  // Initialize connection assessment and load video if appropriate
   assessConnectionAndDevice();
   
-  // Load video after page interaction or after delay for good connections
-  function initVideoLoading() {
-    if (shouldLoadVideo) {
-      // For fast connections, load video after a short delay
-      setTimeout(loadVideoWhenReady, 1000);
-    }
-  }
-  
-  // Load video on user interaction for medium connections
-  function loadOnInteraction() {
-    if (shouldLoadVideo && !videoLoadStarted) {
-      loadVideoWhenReady();
-      // Remove listeners after first interaction
-      document.removeEventListener('click', loadOnInteraction);
-      document.removeEventListener('scroll', loadOnInteraction);
-      document.removeEventListener('touchstart', loadOnInteraction);
-    }
-  }
-  
-  // Set up interaction listeners for lazy loading
-  document.addEventListener('click', loadOnInteraction);
-  document.addEventListener('scroll', loadOnInteraction);
-  document.addEventListener('touchstart', loadOnInteraction);
-
   // Compute and set the hero video's height so it reaches the bottom of #text-call
   // Use requestAnimationFrame for scroll updates and CSS transform for smooth GPU-accelerated motion.
   var rafScheduled = false;
@@ -205,15 +179,15 @@
   }
 
   window.addEventListener('load', function(){ 
-    initVideoLoading(); 
+    loadVideoWhenReady(); 
     updateHeroExtent(); 
   });
   window.addEventListener('resize', scheduleUpdate);
   window.addEventListener('orientationchange', scheduleUpdate);
   window.addEventListener('scroll', scheduleScroll, {passive:true});
-  // Try video loading after delay for good connections
+  // Check video loading immediately
   setTimeout(function(){ 
-    if (shouldLoadVideo) loadVideoWhenReady(); 
+    loadVideoWhenReady(); 
     updateHeroExtent(); 
-  }, 1400);
+  }, 100);
 })();

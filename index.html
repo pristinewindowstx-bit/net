@@ -42,11 +42,9 @@
 <section class="hero">
   <!-- b-roll video background - optimized for slow connections -->
   <video class="hero-video" 
-         muted loop playsinline webkit-playsinline aria-hidden="true" 
+         autoplay muted loop playsinline webkit-playsinline aria-hidden="true" 
          poster="assets/hero.jpg"
-         preload="none"
-         oncanplay="this.play()"
-         onerror="this.style.display='none'">
+         preload="metadata">
     <source src="assets/hero-broll.webm" type="video/webm">
     <source src="assets/hero-broll.mp4" type="video/mp4">
   </video>
